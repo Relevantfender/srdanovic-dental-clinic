@@ -1,0 +1,8 @@
+app-intro {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+app-intro.fade-out{
+  opacity: 0;
+}
