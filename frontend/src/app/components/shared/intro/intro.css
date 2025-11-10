@@ -1,0 +1,38 @@
+.animation-container{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  position: fixed;
+  top:0;
+  left: 0;
+}
+
+.cover{
+  display: flex;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+
+  background: white;
+  opacity: 0;
+  min-width: 600px;
+  min-height: 400px ;
+}
+
+.cover p{
+  font-size: 3rem;
+}
+.container {
+  display: flex;
+  flex: 1;
+  height: 100vh;
+  opacity: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
