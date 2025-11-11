@@ -1,47 +1,51 @@
 <header>
-  <img src="logo-white.png">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <img src="logo-white.png" alt="Dental Clinic Logo">
+
   <div class="content">
-    <ul>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Services
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          About Us
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Patient Resources
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li>(+3816) 64 44 86 435</li>
+    <nav>
+      <ul class="nav-list">
+        @for (item of navItems; track item.label) {
+          <li class="nav-item">
+            @if (item.route) {
+              <a [routerLink]="item.route" class="nav-link">{{ item.label }}</a>
+            } @else {
+              <span class="nav-link">{{ item.label }}</span>
+            }
 
+            @if (item.subItems) {
+              <div class="dropdown">
+                <ul class="dropdown-list">
+                  @for (subItem of item.subItems; track subItem.label) {
+                    <li class="dropdown-item">
+                      @if (subItem.route) {
+                        <a [routerLink]="subItem.route" class="dropdown-link">{{ subItem.label }}</a>
+                      } @else {
+                        <span class="dropdown-link">{{ subItem.label }}</span>
+                      }
 
-    </ul>
-    <button>Request Appointment</button>
+                      @if (subItem.subItems) {
+                        <div class="nested-dropdown">
+                          <ul class="nested-dropdown-list">
+                            @for (nestedItem of subItem.subItems; track nestedItem.label) {
+                              <li class="nested-dropdown-item">
+                                <a [routerLink]="nestedItem.route!" class="nested-dropdown-link">{{ nestedItem.label }}</a>
+                              </li>
+                            }
+                          </ul>
+                        </div>
+                      }
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+          </li>
+        }
+
+        <li class="phone-number">{{ phoneNumber }}</li>
+      </ul>
+    </nav>
+
+    <button class="appointment-btn">Login</button>
   </div>
 </header>
