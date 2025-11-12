@@ -1,7 +1,15 @@
 <header [class.scrolled]="isScrolled">
   <img src="logo-white.png" alt="Dental Clinic Logo">
 
-  <div class="content">
+  <!-- Hamburger Button (visible on mobile) -->
+  <button class="hamburger-button" (click)="toggleMobileMenu()" [class.open]="isMobileMenuOpen" aria-label="Toggle navigation">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+
+  <!-- Desktop Navigation (hidden on mobile) -->
+  <div class="content desktop-nav">
     <nav>
       <ul class="nav-list">
         @for (item of navItems; track item.label) {
@@ -48,6 +56,60 @@
 
     <button class="appointment-btn" (click)="toggleLoginForm()">Login</button>
   </div>
+
+  <!-- Mobile Sidebar Menu -->
+  <div class="mobile-sidebar" [class.open]="isMobileMenuOpen">
+    <nav class="mobile-nav">
+      @for (item of navItems; track item.label) {
+        <div class="mobile-menu-item">
+          @if (item.subItems) {
+            <button class="mobile-menu-toggle"
+                    (click)="toggleSubmenu(item.label)"
+                    [class.expanded]="expandedMenuItems[item.label]">
+              <span>{{ item.label }}</span>
+              <span class="accordion-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="mobile-submenu" [class.expanded]="expandedMenuItems[item.label]">
+              @for (subItem of item.subItems; track subItem.label) {
+                @if (subItem.route) {
+                  <a [routerLink]="subItem.route" class="mobile-submenu-item" (click)="closeMobileMenu()">
+                    {{ subItem.label }}
+                  </a>
+                } @else if (subItem.subItems) {
+                  <div class="mobile-submenu-item has-children"
+                       (click)="toggleSubmenu(getMenuKey(item.label, subItem.label))"
+                       [class.expanded]="expandedMenuItems[getMenuKey(item.label, subItem.label)]">
+                    {{ subItem.label }}
+                  </div>
+                  <div class="nested-mobile-submenu" [class.expanded]="expandedMenuItems[getMenuKey(item.label, subItem.label)]">
+                    @for (nestedItem of subItem.subItems; track nestedItem.label) {
+                      <a [routerLink]="nestedItem.route!" class="nested-mobile-submenu-item" (click)="closeMobileMenu()">
+                        {{ nestedItem.label }}
+                      </a>
+                    }
+                  </div>
+                }
+              }
+            </div>
+          } @else {
+            <a [routerLink]="item.route!" class="mobile-menu-link" (click)="closeMobileMenu()">
+              {{ item.label }}
+            </a>
+          }
+        </div>
+      }
+
+
+    </ul>
+    <button>Request Appointment</button>
+  </div>
+
+  <!-- Overlay -->
+  <div class="mobile-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
 </header>
 
 @if (showLoginForm) {

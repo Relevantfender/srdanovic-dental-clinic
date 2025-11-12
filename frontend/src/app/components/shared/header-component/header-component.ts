@@ -19,11 +19,14 @@ interface NavItem {
 export class HeaderComponent {
   showLoginForm = false;
   isScrolled = false;
+  isMobileMenuOpen = false;
+  expandedMenuItems: { [key: string]: boolean } = {};
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > 50;
   }
+
   navItems: NavItem[] = [
     {
       label: 'Services',
@@ -95,5 +98,49 @@ export class HeaderComponent {
 
   closeLoginForm() {
     this.showLoginForm = false;
+  }
+
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+
+    // Prevent body scroll when menu is open
+    if (this.isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      // Close all submenus when closing the main menu
+      this.expandedMenuItems = {};
+    }
+  }
+
+  closeMobileMenu(): void {
+    this.isMobileMenuOpen = false;
+    document.body.style.overflow = '';
+    // Close all submenus
+    this.expandedMenuItems = {};
+  }
+
+  toggleSubmenu(menuKey: string): void {
+    this.expandedMenuItems[menuKey] = !this.expandedMenuItems[menuKey];
+  }
+
+  getMenuKey(parentLabel: string, label: string): string {
+    return `${parentLabel}-${label}`.replace(/\s+/g, '-').toLowerCase();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const sidebar = document.querySelector('.mobile-sidebar');
+    const hamburger = document.querySelector('.hamburger-button');
+
+    // Close menu if clicking outside sidebar and hamburger button
+    if (this.isMobileMenuOpen &&
+        sidebar &&
+        hamburger &&
+        !sidebar.contains(target) &&
+        !hamburger.contains(target)) {
+      this.closeMobileMenu();
+    }
   }
 }
