@@ -28,7 +28,7 @@
 }
 
 /* Background overlay effect for grayed images */
-.info-block::before {
+.hours-block::before {
   content: '';
   position: absolute;
   top: 0;
@@ -65,17 +65,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
-  margin-bottom: 1rem;
+  padding: 1.2rem 2rem;
+  margin-bottom: 0.8rem;
   background-color: rgba(26, 26, 26, 0.9);
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid #333;
-  transition: all 0.3s ease;
-}
-
-.hours-item:hover {
-  border-color: #c19852;
-  transform: translateX(10px);
 }
 
 .hours-item:last-child {
@@ -94,35 +88,28 @@
   font-weight: 400;
 }
 
-/* Map Placeholder Styling */
-.map-placeholder {
-  display: flex;
+/* Map Block Styling */
+.map-block {
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 1.5rem;
-  padding: 3rem 2rem;
-  background-color: rgba(26, 26, 26, 0.9);
-  border-radius: 10px;
-  border: 2px solid #333;
-  min-height: 350px;
-  transition: border-color 0.3s ease;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23333" width="100" height="100"/></svg>');
+  position: relative;
 }
 
-.map-placeholder:hover {
-  border-color: #c19852;
-}
-
-.map-placeholder svg {
+.map-block svg {
   color: #c19852;
+  position: relative;
+  z-index: 2;
 }
 
-.map-placeholder p {
+.map-address {
   color: white;
   font-size: 1.2rem;
   text-align: center;
   margin: 0;
   line-height: 1.6;
+  position: relative;
+  z-index: 2;
 }
 
 /* Responsive Design */
@@ -163,15 +150,10 @@
   }
 
   .hours-item {
-    padding: 1.2rem 1.5rem;
+    padding: 1rem 1.5rem;
     flex-direction: column;
     gap: 0.5rem;
     text-align: center;
-  }
-
-  .hours-item:hover {
-    transform: translateX(0);
-    transform: scale(1.02);
   }
 
   .day,
@@ -179,17 +161,12 @@
     font-size: 1rem;
   }
 
-  .map-placeholder {
-    min-height: 300px;
-    padding: 2rem 1.5rem;
-  }
-
-  .map-placeholder svg {
+  .map-block svg {
     width: 60px;
     height: 60px;
   }
 
-  .map-placeholder p {
+  .map-address {
     font-size: 1.1rem;
   }
 }
@@ -219,17 +196,12 @@
     font-size: 0.95rem;
   }
 
-  .map-placeholder {
-    min-height: 250px;
-    padding: 1.5rem 1rem;
-  }
-
-  .map-placeholder svg {
+  .map-block svg {
     width: 50px;
     height: 50px;
   }
 
-  .map-placeholder p {
+  .map-address {
     font-size: 1rem;
   }
 }
