@@ -88,8 +88,13 @@ nav {
   margin-top: 1rem ;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease, top 0.3s ease, margin-top 0.3s ease;
   z-index: 100;
+}
+
+header.scrolled .dropdown {
+  top: 150%;
+  margin-top: 0.5rem;
 }
 
 .nav-item:hover > .dropdown {
