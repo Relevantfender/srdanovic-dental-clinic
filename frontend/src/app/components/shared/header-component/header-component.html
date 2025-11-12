@@ -21,22 +21,22 @@
             }
 
             @if (item.subItems) {
-              <div class="dropdown-menu">
+              <div class="dropdown">
                 <ul class="dropdown-list">
                   @for (subItem of item.subItems; track subItem.label) {
-                    <li class="dropdown-item-wrapper">
+                    <li class="dropdown-item">
                       @if (subItem.route) {
-                        <a [routerLink]="subItem.route" class="dropdown-item">{{ subItem.label }}</a>
+                        <a [routerLink]="subItem.route" class="dropdown-link">{{ subItem.label }}</a>
                       } @else {
-                        <span class="dropdown-item" [class.has-submenu]="subItem.subItems">{{ subItem.label }}</span>
+                        <span class="dropdown-link">{{ subItem.label }}</span>
                       }
 
                       @if (subItem.subItems) {
                         <div class="nested-dropdown">
                           <ul class="nested-dropdown-list">
                             @for (nestedItem of subItem.subItems; track nestedItem.label) {
-                              <li class="nested-dropdown-item-wrapper">
-                                <a [routerLink]="nestedItem.route!" class="dropdown-item">{{ nestedItem.label }}</a>
+                              <li class="nested-dropdown-item">
+                                <a [routerLink]="nestedItem.route!" class="nested-dropdown-link">{{ nestedItem.label }}</a>
                               </li>
                             }
                           </ul>
