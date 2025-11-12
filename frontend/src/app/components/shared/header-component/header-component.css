@@ -1,4 +1,5 @@
-header{
+/* Header Container */
+header {
   color: white;
   width: 100vw;
   height: 10rem;
@@ -6,49 +7,204 @@ header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 1rem 2rem;
   align-items: center;
+  position: relative;
+  z-index: 1000;
 }
-.content{
+
+.content {
   display: flex;
   flex-direction: row;
   gap: 5rem;
   align-items: center;
 }
+
 img {
   width: 150px;
 }
-ul {
+
+/* Navigation List */
+nav {
+  position: relative;
+}
+
+.nav-list {
   text-align: right;
   display: flex;
   list-style: none;
   gap: 3rem;
   align-items: center;
   margin: 0;
+  padding: 0;
 }
 
-button{
+/* Nav Items */
+.nav-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #c19852;
+}
+
+.phone-number {
+  color: white;
+  white-space: nowrap;
+}
+
+/* Dropdown - appears beneath nav item */
+.dropdown {
+  position: absolute;
+  top: 200%;
+  left: 50%;
+  border-top: 6px solid #c19852;
+  transform: translateX(-50%);
+  margin-top: 1rem ;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 100;
+}
+
+.nav-item:hover > .dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-list {
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  padding: 1rem 0;
+  list-style: none;
+  margin: 0;
+  min-width: 250px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Dropdown Items */
+.dropdown-item {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #2a2a2a;
+}
+
+.dropdown-link {
+  color: white;
+  text-decoration: none;
+  display: block;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.dropdown-item:hover > .dropdown-link {
+  color: #c19852;
+}
+
+/* Nested Dropdown - appears to the right */
+.nested-dropdown {
+  position: absolute;
+  top: 0;
+  left: 98%;
+  margin-left: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 101;
+}
+
+.dropdown-item:hover > .nested-dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nested-dropdown-list {
+  background-color: #1a1a1a;
+  border-top: 6px solid #c19852;
+  padding: 1rem 0;
+  list-style: none;
+  margin: 0;
+  min-width: 220px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.nested-dropdown-item {
+  padding: 0.75rem 1.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.nested-dropdown-item:hover {
+  background-color: #2a2a2a;
+}
+
+.nested-dropdown-link {
+  color: white;
+  text-decoration: none;
+  display: block;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.nested-dropdown-item:hover .nested-dropdown-link {
+  color: #c19852;
+}
+
+/* Appointment Button */
+.appointment-btn {
   border-radius: 20rem;
   border: 2px solid transparent;
   color: black;
   background-color: #c19852;
-  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-button:hover{
+.appointment-btn:hover {
   background-color: black;
   border: 2px solid #c19852;
   color: white;
 }
 
-/*li::after{*/
-/*  content: "";*/
-/*  display: inline-block;*/
-/*  width: 0;*/
-/*  height: 0;*/
-/*  vertical-align: middle;*/
-/*  margin-left: 0.5em;*/
-/*  border-left: 5px solid transparent;*/
-/*  border-right: 5px solid transparent;*/
-/*  border-top: 5px solid currentColor;*/
-/*}*/
+/* Arrow indicator for items with submenus */
+.nav-item:has(.dropdown) > .nav-link::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  margin-left: 0.5em;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid currentColor;
+}
+
+.dropdown-item:has(.nested-dropdown) > .dropdown-link::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  position: relative;
+  top: 5px;
+  vertical-align: middle;
+  margin-left: 0.5em;
+  float: right;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid currentColor;
+}
