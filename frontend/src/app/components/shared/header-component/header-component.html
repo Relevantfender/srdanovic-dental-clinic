@@ -16,10 +16,17 @@
           Services
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">General Dentistry</a>
+          <a class="dropdown-item has-submenu" href="#">
+            Cosmetic Dentistry
+            <div class="nested-dropdown">
+              <a class="dropdown-item" href="#">Teeth Whitening</a>
+              <a class="dropdown-item" href="#">Veneers</a>
+              <a class="dropdown-item" href="#">Bonding</a>
+            </div>
+          </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Emergency Care</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -27,10 +34,17 @@
           About Us
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Our Team</a>
+          <a class="dropdown-item has-submenu" href="#">
+            Our Clinic
+            <div class="nested-dropdown">
+              <a class="dropdown-item" href="#">Facilities</a>
+              <a class="dropdown-item" href="#">Technology</a>
+              <a class="dropdown-item" href="#">Location</a>
+            </div>
+          </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Testimonials</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -38,10 +52,17 @@
           Patient Resources
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">New Patients</a>
+          <a class="dropdown-item has-submenu" href="#">
+            Patient Forms
+            <div class="nested-dropdown">
+              <a class="dropdown-item" href="#">Registration Form</a>
+              <a class="dropdown-item" href="#">Medical History</a>
+              <a class="dropdown-item" href="#">Consent Forms</a>
+            </div>
+          </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Insurance & Payment</a>
         </div>
       </li>
       <li>(+3816) 64 44 86 435</li>
@@ -63,10 +84,17 @@
           </span>
         </button>
         <div class="mobile-submenu" [class.expanded]="expandedMenuItems['services']">
-          <a href="#" class="mobile-submenu-item">Action</a>
-          <a href="#" class="mobile-submenu-item">Another action</a>
+          <a href="#" class="mobile-submenu-item">General Dentistry</a>
+          <div class="mobile-submenu-item has-children" (click)="toggleNestedSubmenu('services-cosmetic')" [class.expanded]="expandedMenuItems['services-cosmetic']">
+            Cosmetic Dentistry
+          </div>
+          <div class="nested-mobile-submenu" [class.expanded]="expandedMenuItems['services-cosmetic']">
+            <a href="#" class="nested-mobile-submenu-item">Teeth Whitening</a>
+            <a href="#" class="nested-mobile-submenu-item">Veneers</a>
+            <a href="#" class="nested-mobile-submenu-item">Bonding</a>
+          </div>
           <div class="mobile-menu-divider"></div>
-          <a href="#" class="mobile-submenu-item">Something else here</a>
+          <a href="#" class="mobile-submenu-item">Emergency Care</a>
         </div>
       </div>
 
@@ -81,10 +109,17 @@
           </span>
         </button>
         <div class="mobile-submenu" [class.expanded]="expandedMenuItems['aboutUs']">
-          <a href="#" class="mobile-submenu-item">Action</a>
-          <a href="#" class="mobile-submenu-item">Another action</a>
+          <a href="#" class="mobile-submenu-item">Our Team</a>
+          <div class="mobile-submenu-item has-children" (click)="toggleNestedSubmenu('aboutUs-clinic')" [class.expanded]="expandedMenuItems['aboutUs-clinic']">
+            Our Clinic
+          </div>
+          <div class="nested-mobile-submenu" [class.expanded]="expandedMenuItems['aboutUs-clinic']">
+            <a href="#" class="nested-mobile-submenu-item">Facilities</a>
+            <a href="#" class="nested-mobile-submenu-item">Technology</a>
+            <a href="#" class="nested-mobile-submenu-item">Location</a>
+          </div>
           <div class="mobile-menu-divider"></div>
-          <a href="#" class="mobile-submenu-item">Something else here</a>
+          <a href="#" class="mobile-submenu-item">Testimonials</a>
         </div>
       </div>
 
@@ -99,10 +134,17 @@
           </span>
         </button>
         <div class="mobile-submenu" [class.expanded]="expandedMenuItems['patientResources']">
-          <a href="#" class="mobile-submenu-item">Action</a>
-          <a href="#" class="mobile-submenu-item">Another action</a>
+          <a href="#" class="mobile-submenu-item">New Patients</a>
+          <div class="mobile-submenu-item has-children" (click)="toggleNestedSubmenu('patientResources-forms')" [class.expanded]="expandedMenuItems['patientResources-forms']">
+            Patient Forms
+          </div>
+          <div class="nested-mobile-submenu" [class.expanded]="expandedMenuItems['patientResources-forms']">
+            <a href="#" class="nested-mobile-submenu-item">Registration Form</a>
+            <a href="#" class="nested-mobile-submenu-item">Medical History</a>
+            <a href="#" class="nested-mobile-submenu-item">Consent Forms</a>
+          </div>
           <div class="mobile-menu-divider"></div>
-          <a href="#" class="mobile-submenu-item">Something else here</a>
+          <a href="#" class="mobile-submenu-item">Insurance & Payment</a>
         </div>
       </div>
 

@@ -13,7 +13,10 @@ export class HeaderComponent {
   expandedMenuItems: { [key: string]: boolean } = {
     services: false,
     aboutUs: false,
-    patientResources: false
+    patientResources: false,
+    'services-cosmetic': false,
+    'aboutUs-clinic': false,
+    'patientResources-forms': false
   };
 
   toggleMobileMenu(): void {
@@ -41,6 +44,10 @@ export class HeaderComponent {
   }
 
   toggleSubmenu(menuKey: string): void {
+    this.expandedMenuItems[menuKey] = !this.expandedMenuItems[menuKey];
+  }
+
+  toggleNestedSubmenu(menuKey: string): void {
     this.expandedMenuItems[menuKey] = !this.expandedMenuItems[menuKey];
   }
 
