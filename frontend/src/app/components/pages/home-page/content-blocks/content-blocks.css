@@ -1,8 +1,10 @@
 /* Content Blocks Section */
 .content-blocks {
-  width: 100%;
+  width: 100vw;
   background-color: black;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 /* Full-width Content Section */
@@ -11,6 +13,8 @@
   width: 100%;
   min-height: 500px;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 /* Section Halves */
