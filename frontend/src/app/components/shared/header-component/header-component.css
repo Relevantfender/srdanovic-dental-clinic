@@ -14,11 +14,13 @@ header {
   left: 0;
   z-index: 1000;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, height 0.3s ease, padding 0.3s ease;
 }
 
 header.scrolled {
   background: rgba(0, 0, 0, 0.5);
+  height: 5rem;
+  padding: 0.5rem 2rem;
 }
 
 .content {
@@ -30,6 +32,11 @@ header.scrolled {
 
 img {
   width: 150px;
+  transition: width 0.3s ease;
+}
+
+header.scrolled img {
+  width: 100px;
 }
 
 /* Navigation List */
