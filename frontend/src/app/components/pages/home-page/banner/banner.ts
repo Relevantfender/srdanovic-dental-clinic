@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-banner',
@@ -7,24 +7,13 @@ import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
   templateUrl: './banner.html',
   styleUrl: './banner.css'
 })
-export class Banner implements AfterViewInit {
-  @ViewChild('videoPlayer') videoPlayer!: ElementRef;
-
-  ngAfterViewInit(): void {
-    this.playVideo();
-    // this.videoRef.nativeElement.muted = true;
-    // this.videoRef.nativeElement.play().catch(() => {});
+export class Banner {
+  // Methods for button actions can be added here later
+  onAestheticMedicineClick(): void {
+    console.log('Aesthetic Medicine clicked');
   }
 
-  playVideo(): void {
-    if (this.videoPlayer && this.videoPlayer.nativeElement) {
-      this.videoPlayer.nativeElement.play()
-        .then(() => {
-          console.log('Video autoplay successful.');
-        })
-        .catch((error: any) => {
-          console.error('Video autoplay failed:', error);
-        });
-    }
+  onDentalMedicineClick(): void {
+    console.log('Dental Medicine clicked');
   }
 }

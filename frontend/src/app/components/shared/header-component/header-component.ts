@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LoginForm } from '../login-form/login-form';
@@ -18,6 +18,12 @@ interface NavItem {
 })
 export class HeaderComponent {
   showLoginForm = false;
+  isScrolled = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 50;
+  }
   navItems: NavItem[] = [
     {
       label: 'Services',

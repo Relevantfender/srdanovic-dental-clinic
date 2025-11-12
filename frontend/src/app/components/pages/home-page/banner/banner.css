@@ -1,28 +1,127 @@
-
+/* Banner Container */
 .video-background-container {
   position: relative;
-  width: 100%;
-  height: 500px;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
+  margin-bottom: 3rem;
 }
 
-.video-background-container video {
+/* Background Image */
+.banner-background {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
-  min-height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  z-index: -1;
+  z-index: 0;
 }
 
-.overlay-content {
+/* Overlay Blocks */
+.overlay-block {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 15vh;
+  cursor: pointer;
+  transition: all 0.5s ease;
   z-index: 1;
+}
+
+.overlay-block:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.left-overlay {
+  left: 0;
+}
+
+.right-overlay {
+  right: 0;
+}
+
+/* Category Text */
+.category-text {
+  font-size: 2rem;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  margin: 0;
+  transition: all 0.5s ease;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+.overlay-block:hover .category-text {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  transform: translateY(-10px);
+  letter-spacing: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .overlay-block {
+    padding-bottom: 12vh;
+  }
+
+  .category-text {
+    font-size: 1.6rem;
+    letter-spacing: 6px;
+  }
+
+  .overlay-block:hover .category-text {
+    letter-spacing: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .overlay-block {
+    width: 100%;
+    top: auto;
+    height: 50%;
+    padding-bottom: 10vh;
+  }
+
+  .left-overlay {
+    top: 0;
+    left: 0;
+  }
+
+  .right-overlay {
+    top: 50%;
+    right: 0;
+  }
+
+  .category-text {
+    font-size: 1.4rem;
+    letter-spacing: 5px;
+  }
+
+  .overlay-block:hover .category-text {
+    letter-spacing: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay-block {
+    padding-bottom: 8vh;
+  }
+
+  .category-text {
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+  }
+
+  .overlay-block:hover .category-text {
+    letter-spacing: 5px;
+  }
 }
