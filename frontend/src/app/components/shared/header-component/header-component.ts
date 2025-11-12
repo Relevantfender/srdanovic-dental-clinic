@@ -1,23 +1,94 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+interface NavItem {
+  label: string;
+  route?: string;
+  subItems?: NavItem[];
+}
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header-component.html',
   styleUrl: './header-component.css'
 })
 export class HeaderComponent {
+  isScrolled = false;
   isMobileMenuOpen = false;
-  expandedMenuItems: { [key: string]: boolean } = {
-    services: false,
-    aboutUs: false,
-    patientResources: false,
-    'services-cosmetic': false,
-    'aboutUs-clinic': false,
-    'patientResources-forms': false
-  };
+  expandedMenuItems: { [key: string]: boolean } = {};
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 50;
+  }
+
+  navItems: NavItem[] = [
+    {
+      label: 'Services',
+      subItems: [
+        {
+          label: 'General Dentistry',
+          subItems: [
+            { label: 'Dental Checkups', route: '/services/general/checkups' },
+            { label: 'Teeth Cleaning', route: '/services/general/cleaning' },
+            { label: 'Fillings', route: '/services/general/fillings' }
+          ]
+        },
+        {
+          label: 'Cosmetic Dentistry',
+          subItems: [
+            { label: 'Teeth Whitening', route: '/services/cosmetic/whitening' },
+            { label: 'Veneers', route: '/services/cosmetic/veneers' },
+            { label: 'Bonding', route: '/services/cosmetic/bonding' }
+          ]
+        },
+        {
+          label: 'Orthodontics',
+          subItems: [
+            { label: 'Braces', route: '/services/orthodontics/braces' },
+            { label: 'Invisalign', route: '/services/orthodontics/invisalign' }
+          ]
+        },
+        { label: 'Emergency Services', route: '/services/emergency' }
+      ]
+    },
+    {
+      label: 'About Us',
+      subItems: [
+        { label: 'Our Team', route: '/about/team' },
+        { label: 'Our Practice', route: '/about/practice' },
+        {
+          label: 'Testimonials',
+          subItems: [
+            { label: 'Patient Reviews', route: '/about/testimonials/reviews' },
+            { label: 'Success Stories', route: '/about/testimonials/stories' }
+          ]
+        },
+        { label: 'Contact', route: '/about/contact' }
+      ]
+    },
+    {
+      label: 'Patient Resources',
+      subItems: [
+        { label: 'New Patients', route: '/resources/new-patients' },
+        { label: 'Insurance & Payment', route: '/resources/insurance' },
+        { label: 'FAQs', route: '/resources/faqs' },
+        {
+          label: 'Forms',
+          subItems: [
+            { label: 'Patient Registration', route: '/resources/forms/registration' },
+            { label: 'Medical History', route: '/resources/forms/medical-history' },
+            { label: 'Consent Forms', route: '/resources/forms/consent' }
+          ]
+        }
+      ]
+    }
+  ];
+
+  phoneNumber = '(+3816) 64 44 86 435';
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
@@ -28,9 +99,7 @@ export class HeaderComponent {
     } else {
       document.body.style.overflow = '';
       // Close all submenus when closing the main menu
-      Object.keys(this.expandedMenuItems).forEach(key => {
-        this.expandedMenuItems[key] = false;
-      });
+      this.expandedMenuItems = {};
     }
   }
 
@@ -38,17 +107,15 @@ export class HeaderComponent {
     this.isMobileMenuOpen = false;
     document.body.style.overflow = '';
     // Close all submenus
-    Object.keys(this.expandedMenuItems).forEach(key => {
-      this.expandedMenuItems[key] = false;
-    });
+    this.expandedMenuItems = {};
   }
 
   toggleSubmenu(menuKey: string): void {
     this.expandedMenuItems[menuKey] = !this.expandedMenuItems[menuKey];
   }
 
-  toggleNestedSubmenu(menuKey: string): void {
-    this.expandedMenuItems[menuKey] = !this.expandedMenuItems[menuKey];
+  getMenuKey(parentLabel: string, label: string): string {
+    return `${parentLabel}-${label}`.replace(/\s+/g, '-').toLowerCase();
   }
 
   @HostListener('document:click', ['$event'])

@@ -24,7 +24,8 @@ img {
   z-index: 1001;
 }
 
-ul {
+/* Desktop Navigation */
+.nav-list {
   text-align: right;
   display: flex;
   list-style: none;
@@ -34,7 +35,6 @@ ul {
   padding: 0;
 }
 
-/* Desktop Navigation Dropdown Styles */
 .nav-item {
   position: relative;
   cursor: pointer;
@@ -46,12 +46,18 @@ ul {
   padding: 0.5rem 0;
   display: inline-block;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .nav-link:hover {
   color: #c19852;
 }
 
+.phone-number {
+  color: white;
+}
+
+/* Desktop Dropdown Styles */
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -73,6 +79,16 @@ ul {
   transform: translateY(0);
 }
 
+.dropdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-item-wrapper {
+  position: relative;
+}
+
 .dropdown-item {
   display: block;
   padding: 0.75rem 1.25rem;
@@ -80,6 +96,7 @@ ul {
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
+  cursor: pointer;
 }
 
 .dropdown-item:hover {
@@ -95,10 +112,6 @@ ul {
 }
 
 /* Nested dropdown styles for desktop */
-.dropdown-item.has-submenu {
-  position: relative;
-}
-
 .dropdown-item.has-submenu::after {
   content: "›";
   position: absolute;
@@ -106,7 +119,7 @@ ul {
   font-size: 1.2rem;
 }
 
-.dropdown-item .nested-dropdown {
+.nested-dropdown {
   position: absolute;
   left: 100%;
   top: 0;
@@ -119,12 +132,19 @@ ul {
   transition: all 0.3s ease;
 }
 
-.dropdown-item:hover .nested-dropdown {
+.dropdown-item-wrapper:hover .nested-dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateX(0);
 }
 
+.nested-dropdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Buttons */
 button{
   border-radius: 20rem;
   border: 2px solid transparent;
@@ -243,6 +263,14 @@ button:hover{
 /* Gold underline for expanded accordion */
 .mobile-menu-toggle.expanded {
   border-bottom-color: #c19852;
+}
+
+.mobile-menu-link {
+  display: block;
+  padding: 1.25rem 0;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
 }
 
 .accordion-icon {

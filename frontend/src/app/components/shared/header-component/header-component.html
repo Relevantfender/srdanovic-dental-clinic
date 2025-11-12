@@ -1,5 +1,5 @@
-<header>
-  <img src="logo-white.png" alt="Logo">
+<header [class.scrolled]="isScrolled">
+  <img src="logo-white.png" alt="Dental Clinic Logo">
 
   <!-- Hamburger Button (visible on mobile) -->
   <button class="hamburger-button" (click)="toggleMobileMenu()" [class.open]="isMobileMenuOpen" aria-label="Toggle navigation">
@@ -10,147 +10,102 @@
 
   <!-- Desktop Navigation (hidden on mobile) -->
   <div class="content desktop-nav">
-    <ul>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Services
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">General Dentistry</a>
-          <a class="dropdown-item has-submenu" href="#">
-            Cosmetic Dentistry
-            <div class="nested-dropdown">
-              <a class="dropdown-item" href="#">Teeth Whitening</a>
-              <a class="dropdown-item" href="#">Veneers</a>
-              <a class="dropdown-item" href="#">Bonding</a>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Emergency Care</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          About Us
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Our Team</a>
-          <a class="dropdown-item has-submenu" href="#">
-            Our Clinic
-            <div class="nested-dropdown">
-              <a class="dropdown-item" href="#">Facilities</a>
-              <a class="dropdown-item" href="#">Technology</a>
-              <a class="dropdown-item" href="#">Location</a>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Testimonials</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Patient Resources
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">New Patients</a>
-          <a class="dropdown-item has-submenu" href="#">
-            Patient Forms
-            <div class="nested-dropdown">
-              <a class="dropdown-item" href="#">Registration Form</a>
-              <a class="dropdown-item" href="#">Medical History</a>
-              <a class="dropdown-item" href="#">Consent Forms</a>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Insurance & Payment</a>
-        </div>
-      </li>
-      <li>(+3816) 64 44 86 435</li>
-    </ul>
-    <button>Request Appointment</button>
+    <nav>
+      <ul class="nav-list">
+        @for (item of navItems; track item.label) {
+          <li class="nav-item">
+            @if (item.route) {
+              <a [routerLink]="item.route" class="nav-link">{{ item.label }}</a>
+            } @else {
+              <span class="nav-link">{{ item.label }}</span>
+            }
+
+            @if (item.subItems) {
+              <div class="dropdown-menu">
+                <ul class="dropdown-list">
+                  @for (subItem of item.subItems; track subItem.label) {
+                    <li class="dropdown-item-wrapper">
+                      @if (subItem.route) {
+                        <a [routerLink]="subItem.route" class="dropdown-item">{{ subItem.label }}</a>
+                      } @else {
+                        <span class="dropdown-item" [class.has-submenu]="subItem.subItems">{{ subItem.label }}</span>
+                      }
+
+                      @if (subItem.subItems) {
+                        <div class="nested-dropdown">
+                          <ul class="nested-dropdown-list">
+                            @for (nestedItem of subItem.subItems; track nestedItem.label) {
+                              <li class="nested-dropdown-item-wrapper">
+                                <a [routerLink]="nestedItem.route!" class="dropdown-item">{{ nestedItem.label }}</a>
+                              </li>
+                            }
+                          </ul>
+                        </div>
+                      }
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+          </li>
+        }
+
+        <li class="phone-number">{{ phoneNumber }}</li>
+      </ul>
+    </nav>
+
+    <button class="appointment-btn">Request Appointment</button>
   </div>
 
   <!-- Mobile Sidebar Menu -->
   <div class="mobile-sidebar" [class.open]="isMobileMenuOpen">
     <nav class="mobile-nav">
-      <!-- Services Accordion -->
-      <div class="mobile-menu-item">
-        <button class="mobile-menu-toggle" (click)="toggleSubmenu('services')" [class.expanded]="expandedMenuItems['services']">
-          <span>Services</span>
-          <span class="accordion-icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-        </button>
-        <div class="mobile-submenu" [class.expanded]="expandedMenuItems['services']">
-          <a href="#" class="mobile-submenu-item">General Dentistry</a>
-          <div class="mobile-submenu-item has-children" (click)="toggleNestedSubmenu('services-cosmetic')" [class.expanded]="expandedMenuItems['services-cosmetic']">
-            Cosmetic Dentistry
-          </div>
-          <div class="nested-mobile-submenu" [class.expanded]="expandedMenuItems['services-cosmetic']">
-            <a href="#" class="nested-mobile-submenu-item">Teeth Whitening</a>
-            <a href="#" class="nested-mobile-submenu-item">Veneers</a>
-            <a href="#" class="nested-mobile-submenu-item">Bonding</a>
-          </div>
-          <div class="mobile-menu-divider"></div>
-          <a href="#" class="mobile-submenu-item">Emergency Care</a>
+      @for (item of navItems; track item.label) {
+        <div class="mobile-menu-item">
+          @if (item.subItems) {
+            <button class="mobile-menu-toggle"
+                    (click)="toggleSubmenu(item.label)"
+                    [class.expanded]="expandedMenuItems[item.label]">
+              <span>{{ item.label }}</span>
+              <span class="accordion-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="mobile-submenu" [class.expanded]="expandedMenuItems[item.label]">
+              @for (subItem of item.subItems; track subItem.label) {
+                @if (subItem.route) {
+                  <a [routerLink]="subItem.route" class="mobile-submenu-item" (click)="closeMobileMenu()">
+                    {{ subItem.label }}
+                  </a>
+                } @else if (subItem.subItems) {
+                  <div class="mobile-submenu-item has-children"
+                       (click)="toggleSubmenu(getMenuKey(item.label, subItem.label))"
+                       [class.expanded]="expandedMenuItems[getMenuKey(item.label, subItem.label)]">
+                    {{ subItem.label }}
+                  </div>
+                  <div class="nested-mobile-submenu" [class.expanded]="expandedMenuItems[getMenuKey(item.label, subItem.label)]">
+                    @for (nestedItem of subItem.subItems; track nestedItem.label) {
+                      <a [routerLink]="nestedItem.route!" class="nested-mobile-submenu-item" (click)="closeMobileMenu()">
+                        {{ nestedItem.label }}
+                      </a>
+                    }
+                  </div>
+                }
+              }
+            </div>
+          } @else {
+            <a [routerLink]="item.route!" class="mobile-menu-link" (click)="closeMobileMenu()">
+              {{ item.label }}
+            </a>
+          }
         </div>
-      </div>
-
-      <!-- About Us Accordion -->
-      <div class="mobile-menu-item">
-        <button class="mobile-menu-toggle" (click)="toggleSubmenu('aboutUs')" [class.expanded]="expandedMenuItems['aboutUs']">
-          <span>About Us</span>
-          <span class="accordion-icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-        </button>
-        <div class="mobile-submenu" [class.expanded]="expandedMenuItems['aboutUs']">
-          <a href="#" class="mobile-submenu-item">Our Team</a>
-          <div class="mobile-submenu-item has-children" (click)="toggleNestedSubmenu('aboutUs-clinic')" [class.expanded]="expandedMenuItems['aboutUs-clinic']">
-            Our Clinic
-          </div>
-          <div class="nested-mobile-submenu" [class.expanded]="expandedMenuItems['aboutUs-clinic']">
-            <a href="#" class="nested-mobile-submenu-item">Facilities</a>
-            <a href="#" class="nested-mobile-submenu-item">Technology</a>
-            <a href="#" class="nested-mobile-submenu-item">Location</a>
-          </div>
-          <div class="mobile-menu-divider"></div>
-          <a href="#" class="mobile-submenu-item">Testimonials</a>
-        </div>
-      </div>
-
-      <!-- Patient Resources Accordion -->
-      <div class="mobile-menu-item">
-        <button class="mobile-menu-toggle" (click)="toggleSubmenu('patientResources')" [class.expanded]="expandedMenuItems['patientResources']">
-          <span>Patient Resources</span>
-          <span class="accordion-icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-        </button>
-        <div class="mobile-submenu" [class.expanded]="expandedMenuItems['patientResources']">
-          <a href="#" class="mobile-submenu-item">New Patients</a>
-          <div class="mobile-submenu-item has-children" (click)="toggleNestedSubmenu('patientResources-forms')" [class.expanded]="expandedMenuItems['patientResources-forms']">
-            Patient Forms
-          </div>
-          <div class="nested-mobile-submenu" [class.expanded]="expandedMenuItems['patientResources-forms']">
-            <a href="#" class="nested-mobile-submenu-item">Registration Form</a>
-            <a href="#" class="nested-mobile-submenu-item">Medical History</a>
-            <a href="#" class="nested-mobile-submenu-item">Consent Forms</a>
-          </div>
-          <div class="mobile-menu-divider"></div>
-          <a href="#" class="mobile-submenu-item">Insurance & Payment</a>
-        </div>
-      </div>
+      }
 
       <!-- Phone Number -->
       <div class="mobile-menu-item mobile-phone">
-        <a href="tel:+381664448435">(+3816) 64 44 86 435</a>
+        <a href="tel:+381664448435">{{ phoneNumber }}</a>
       </div>
 
       <!-- Request Appointment Button -->
