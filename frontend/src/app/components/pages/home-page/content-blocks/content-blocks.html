@@ -46,7 +46,7 @@
     <div class="section-half carousel-section">
       <div class="doctor-carousel">
         <div class="carousel-container">
-          <div class="carousel-track" [style.transform]="'translateX(-' + (currentDoctorIndex * 100) + '%)'">
+          <div class="carousel-track" [style.transform]="'translateX(calc(-' + (currentDoctorIndex * 70) + '% - ' + (currentDoctorIndex * 30) + 'px))'">
             @for (doctor of doctors; track doctor.name; let i = $index) {
               <div class="doctor-card" [class.active]="i === currentDoctorIndex">
                 <div class="doctor-image-placeholder">
