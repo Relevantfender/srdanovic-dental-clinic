@@ -8,8 +8,9 @@ footer {
 }
 
 .footer-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
   gap: 2rem;
   max-width: 1400px;
   margin: 0 auto;
