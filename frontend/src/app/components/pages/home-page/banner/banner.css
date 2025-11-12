@@ -2,7 +2,7 @@
 .video-background-container {
   position: relative;
   width: 100vw;
-  height: 600px;
+  height: 100vh;
   overflow: hidden;
   margin-bottom: 3rem;
 }
@@ -27,14 +27,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  transition: opacity 0.4s ease;
+  cursor: pointer;
+  transition: all 0.5s ease;
   z-index: 1;
 }
 
 .overlay-block:hover {
-  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .left-overlay {
@@ -45,46 +46,33 @@
   right: 0;
 }
 
-/* Category Buttons */
-.category-btn {
-  padding: 1.5rem 3rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: white;
-  background-color: transparent;
-  border: 3px solid #c19852;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* Category Text */
+.category-text {
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 3px;
+  margin: 0;
+  transition: all 0.5s ease;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-.category-btn:hover {
-  background-color: #c19852;
-  color: black;
+.overlay-block:hover .category-text {
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7);
   transform: scale(1.05);
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .video-background-container {
-    height: 500px;
-    margin-bottom: 2.5rem;
-  }
-
-  .category-btn {
-    padding: 1.2rem 2.5rem;
-    font-size: 1.3rem;
+  .category-text {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
   }
 }
 
 @media (max-width: 768px) {
-  .video-background-container {
-    height: 450px;
-    margin-bottom: 2rem;
-  }
-
   .overlay-block {
     width: 100%;
     top: auto;
@@ -101,21 +89,15 @@
     right: 0;
   }
 
-  .category-btn {
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
+  .category-text {
+    font-size: 2rem;
+    letter-spacing: 2px;
   }
 }
 
 @media (max-width: 480px) {
-  .video-background-container {
-    height: 400px;
-    margin-bottom: 1.5rem;
-  }
-
-  .category-btn {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    border-width: 2px;
+  .category-text {
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
   }
 }
