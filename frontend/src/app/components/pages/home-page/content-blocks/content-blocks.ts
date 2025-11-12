@@ -24,8 +24,7 @@ export class ContentBlocksComponent {
   isTransitioning = true;
 
   getTransform(): string {
-    const cardWidth = 85; // 85% width + margins
-    const offset = this.currentDoctorIndex * cardWidth;
+    const offset = this.currentDoctorIndex * 100;
     return `translateX(-${offset}%)`;
   }
 
