@@ -18,13 +18,35 @@ export class ContentBlocksComponent {
     { name: 'Dr. Robert Wilson', specialty: 'Oral Surgeon' }
   ];
 
-  currentDoctorIndex = 0;
+  // Create an infinite loop by tripling the array
+  infiniteDoctors = [...this.doctors, ...this.doctors, ...this.doctors];
+  currentDoctorIndex = this.doctors.length; // Start at the middle copy
+  isTransitioning = true;
 
-  get currentDoctor() {
-    return this.doctors[this.currentDoctorIndex];
+  getTransform(): string {
+    const cardWidth = 85; // 85% width + margins
+    const offset = this.currentDoctorIndex * cardWidth;
+    return `translateX(-${offset}%)`;
+  }
+
+  isActive(index: number): boolean {
+    return index === this.currentDoctorIndex;
   }
 
   nextDoctor() {
-    this.currentDoctorIndex = (this.currentDoctorIndex + 1) % this.doctors.length;
+    this.isTransitioning = true;
+    this.currentDoctorIndex++;
+
+    // If we've reached the end of the second copy, reset to the start of the middle copy
+    if (this.currentDoctorIndex >= this.doctors.length * 2) {
+      setTimeout(() => {
+        this.isTransitioning = false;
+        this.currentDoctorIndex = this.doctors.length;
+        // Force reflow
+        setTimeout(() => {
+          this.isTransitioning = true;
+        }, 50);
+      }, 500); // Match the CSS transition duration
+    }
   }
 }

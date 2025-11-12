@@ -44,20 +44,24 @@
       </div>
     </div>
     <div class="section-half carousel-section">
-      <div class="doctor-carousel">
-        <div class="carousel-container">
-          <div class="carousel-track" [style.transform]="'translateX(calc(-' + (currentDoctorIndex * 70) + '% - ' + (currentDoctorIndex * 30) + 'px))'">
-            @for (doctor of doctors; track doctor.name; let i = $index) {
-              <div class="doctor-card" [class.active]="i === currentDoctorIndex">
-                <div class="doctor-image-placeholder">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                  </svg>
+      <div class="carousel-wrapper">
+        <div class="doctor-carousel">
+          <div class="carousel-container">
+            <div class="carousel-track"
+                 [style.transform]="getTransform()"
+                 [style.transition]="isTransitioning ? 'transform 0.5s ease-in-out' : 'none'">
+              @for (doctor of infiniteDoctors; track $index; let i = $index) {
+                <div class="doctor-card" [class.active]="isActive(i)">
+                  <div class="doctor-image-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                  </div>
+                  <h3>{{ doctor.name }}</h3>
+                  <p class="specialty">{{ doctor.specialty }}</p>
                 </div>
-                <h3>{{ doctor.name }}</h3>
-                <p class="specialty">{{ doctor.specialty }}</p>
-              </div>
-            }
+              }
+            </div>
           </div>
         </div>
         <button class="carousel-btn" (click)="nextDoctor()">
