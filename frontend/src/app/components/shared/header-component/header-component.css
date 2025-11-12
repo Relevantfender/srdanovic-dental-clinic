@@ -93,8 +93,8 @@ nav {
 }
 
 header.scrolled .dropdown {
-  top: 150%;
-  margin-top: 0.5rem;
+  top: 100%;
+  margin-top: 0.2rem;
 }
 
 .nav-item:hover > .dropdown {
