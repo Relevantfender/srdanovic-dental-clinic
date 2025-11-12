@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { LoginForm } from '../login-form/login-form';
 
 interface NavItem {
   label: string;
@@ -11,11 +12,12 @@ interface NavItem {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, LoginForm],
   templateUrl: './header-component.html',
   styleUrl: './header-component.css'
 })
 export class HeaderComponent {
+  showLoginForm = false;
   isScrolled = false;
   isMobileMenuOpen = false;
   expandedMenuItems: { [key: string]: boolean } = {};
@@ -89,6 +91,14 @@ export class HeaderComponent {
   ];
 
   phoneNumber = '(+3816) 64 44 86 435';
+
+  toggleLoginForm() {
+    this.showLoginForm = !this.showLoginForm;
+  }
+
+  closeLoginForm() {
+    this.showLoginForm = false;
+  }
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;

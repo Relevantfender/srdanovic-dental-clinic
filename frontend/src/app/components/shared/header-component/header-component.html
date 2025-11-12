@@ -54,7 +54,7 @@
       </ul>
     </nav>
 
-    <button class="appointment-btn">Request Appointment</button>
+    <button class="appointment-btn" (click)="toggleLoginForm()">Login</button>
   </div>
 
   <!-- Mobile Sidebar Menu -->
@@ -118,3 +118,7 @@
   <!-- Overlay -->
   <div class="mobile-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
 </header>
+
+@if (showLoginForm) {
+  <app-login-form (close)="closeLoginForm()"></app-login-form>
+}
