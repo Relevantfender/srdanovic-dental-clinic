@@ -1,41 +1,28 @@
 /* Content Blocks Section */
 .content-blocks {
-  background-color: #0a0a0a;
-  padding: 4rem 2rem;
   width: 100%;
+  background-color: black;
 }
 
-/* Row Layout */
-.row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  margin-bottom: 2rem;
-}
-
-.row:last-child {
-  margin-bottom: 0;
-}
-
-/* Block Styles */
-.block {
-  background-color: #1a1a1a;
-  border: 2px solid #333;
-  border-top: 4px solid #c19852;
-  padding: 2rem;
-  min-height: 300px;
+/* Full-width Content Section */
+.content-section {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: 100%;
+  min-height: 500px;
 }
 
-/* Video Block */
-.video-block {
-  background-color: #0f0f0f;
+/* Section Halves */
+.section-half {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
+  padding: 4rem;
+}
+
+/* Video Section */
+.video-section {
+  background-color: #0a0a0a;
 }
 
 .video-placeholder {
@@ -56,35 +43,39 @@
   margin: 0;
 }
 
-/* Text Block */
-.text-block h2 {
+/* Text Section */
+.text-section {
+  background-color: #1a1a1a;
+}
+
+.text-content {
+  max-width: 600px;
+}
+
+.text-content h2 {
   color: #c19852;
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 1.5rem;
   font-weight: 600;
 }
 
-.text-block p {
+.text-content p {
   color: white;
   line-height: 1.8;
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
 }
 
-.text-block p:last-child {
+.text-content p:last-child {
   margin-bottom: 0;
 }
 
-/* Carousel Block */
-.carousel-block {
-  background-color: #0f0f0f;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem 2rem;
+/* Carousel Section */
+.carousel-section {
+  background-color: #0a0a0a;
 }
 
 .doctor-carousel {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,11 +91,11 @@
 }
 
 .doctor-image-placeholder {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   background-color: #2a2a2a;
-  border: 3px solid #c19852;
+  border: 4px solid #c19852;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,14 +107,14 @@
 
 .doctor-card h3 {
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin: 0;
   font-weight: 600;
 }
 
 .doctor-card .specialty {
   color: #c19852;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin: 0;
   font-style: italic;
 }
@@ -133,8 +124,8 @@
   background-color: #c19852;
   border: 2px solid transparent;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,30 +150,66 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .row {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .content-section {
+    flex-direction: column;
+    min-height: auto;
   }
 
-  .block {
-    min-height: 250px;
+  .section-half {
+    width: 100%;
+    min-height: 400px;
+    padding: 3rem 2rem;
+  }
+
+  .text-content {
+    max-width: 100%;
   }
 }
 
 @media (max-width: 768px) {
-  .content-blocks {
-    padding: 3rem 1rem;
+  .section-half {
+    padding: 2rem 1.5rem;
+    min-height: 350px;
   }
 
-  .block {
-    padding: 1.5rem;
+  .text-content h2 {
+    font-size: 2rem;
   }
 
-  .text-block h2 {
+  .text-content p {
+    font-size: 1rem;
+  }
+
+  .doctor-image-placeholder {
+    width: 150px;
+    height: 150px;
+  }
+
+  .doctor-card h3 {
     font-size: 1.5rem;
   }
 
-  .text-block p {
+  .doctor-card .specialty {
+    font-size: 1.1rem;
+  }
+
+  .carousel-btn {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-half {
+    padding: 2rem 1rem;
+    min-height: 300px;
+  }
+
+  .text-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .text-content p {
     font-size: 0.95rem;
   }
 
