@@ -2,12 +2,13 @@ import {Component, effect, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Intro } from './components/shared/intro/intro';
 import { HeaderComponent } from './components/shared/header-component/header-component';
+import { FooterComponent } from './components/shared/footer-component/footer-component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Intro, HeaderComponent],
+  imports: [RouterOutlet, Intro, HeaderComponent, FooterComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
