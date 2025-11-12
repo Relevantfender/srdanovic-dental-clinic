@@ -1,12 +1,18 @@
 <header>
-  <img src="logo-white.png">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+  <img src="logo-white.png" alt="Logo">
+
+  <!-- Hamburger Button (visible on mobile) -->
+  <button class="hamburger-button" (click)="toggleMobileMenu()" [class.open]="isMobileMenuOpen" aria-label="Toggle navigation">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
   </button>
-  <div class="content">
+
+  <!-- Desktop Navigation (hidden on mobile) -->
+  <div class="content desktop-nav">
     <ul>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Services
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -17,7 +23,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           About Us
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -28,7 +34,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Patient Resources
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -39,9 +45,79 @@
         </div>
       </li>
       <li>(+3816) 64 44 86 435</li>
-
-
     </ul>
     <button>Request Appointment</button>
   </div>
+
+  <!-- Mobile Sidebar Menu -->
+  <div class="mobile-sidebar" [class.open]="isMobileMenuOpen">
+    <nav class="mobile-nav">
+      <!-- Services Accordion -->
+      <div class="mobile-menu-item">
+        <button class="mobile-menu-toggle" (click)="toggleSubmenu('services')" [class.expanded]="expandedMenuItems['services']">
+          <span>Services</span>
+          <span class="accordion-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+        <div class="mobile-submenu" [class.expanded]="expandedMenuItems['services']">
+          <a href="#" class="mobile-submenu-item">Action</a>
+          <a href="#" class="mobile-submenu-item">Another action</a>
+          <div class="mobile-menu-divider"></div>
+          <a href="#" class="mobile-submenu-item">Something else here</a>
+        </div>
+      </div>
+
+      <!-- About Us Accordion -->
+      <div class="mobile-menu-item">
+        <button class="mobile-menu-toggle" (click)="toggleSubmenu('aboutUs')" [class.expanded]="expandedMenuItems['aboutUs']">
+          <span>About Us</span>
+          <span class="accordion-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+        <div class="mobile-submenu" [class.expanded]="expandedMenuItems['aboutUs']">
+          <a href="#" class="mobile-submenu-item">Action</a>
+          <a href="#" class="mobile-submenu-item">Another action</a>
+          <div class="mobile-menu-divider"></div>
+          <a href="#" class="mobile-submenu-item">Something else here</a>
+        </div>
+      </div>
+
+      <!-- Patient Resources Accordion -->
+      <div class="mobile-menu-item">
+        <button class="mobile-menu-toggle" (click)="toggleSubmenu('patientResources')" [class.expanded]="expandedMenuItems['patientResources']">
+          <span>Patient Resources</span>
+          <span class="accordion-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+        <div class="mobile-submenu" [class.expanded]="expandedMenuItems['patientResources']">
+          <a href="#" class="mobile-submenu-item">Action</a>
+          <a href="#" class="mobile-submenu-item">Another action</a>
+          <div class="mobile-menu-divider"></div>
+          <a href="#" class="mobile-submenu-item">Something else here</a>
+        </div>
+      </div>
+
+      <!-- Phone Number -->
+      <div class="mobile-menu-item mobile-phone">
+        <a href="tel:+381664448435">(+3816) 64 44 86 435</a>
+      </div>
+
+      <!-- Request Appointment Button -->
+      <div class="mobile-menu-item mobile-appointment">
+        <button class="appointment-button">Request Appointment</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Overlay -->
+  <div class="mobile-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
 </header>
