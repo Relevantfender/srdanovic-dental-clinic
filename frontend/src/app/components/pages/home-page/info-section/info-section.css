@@ -1,0 +1,235 @@
+/* Info Section */
+.info-section {
+  width: 100vw;
+  background-color: black;
+  margin-top: 4rem;
+  overflow: hidden;
+  padding: 0;
+}
+
+.info-container {
+  display: flex;
+  width: 100%;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+/* Info Blocks */
+.info-block {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Background overlay effect for grayed images */
+.info-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.block-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  width: 100%;
+}
+
+.block-content h2 {
+  color: #c19852;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Working Hours Styling */
+.hours-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hours-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1rem;
+  background-color: rgba(26, 26, 26, 0.9);
+  border-radius: 10px;
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+}
+
+.hours-item:hover {
+  border-color: #c19852;
+  transform: translateX(10px);
+}
+
+.hours-item:last-child {
+  margin-bottom: 0;
+}
+
+.day {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.hours {
+  color: #c19852;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+/* Map Placeholder Styling */
+.map-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 3rem 2rem;
+  background-color: rgba(26, 26, 26, 0.9);
+  border-radius: 10px;
+  border: 2px solid #333;
+  min-height: 350px;
+  transition: border-color 0.3s ease;
+}
+
+.map-placeholder:hover {
+  border-color: #c19852;
+}
+
+.map-placeholder svg {
+  color: #c19852;
+}
+
+.map-placeholder p {
+  color: white;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .info-container {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .info-block {
+    width: 100%;
+    min-height: 400px;
+    padding: 3rem 2rem;
+  }
+
+  .block-content {
+    max-width: 100%;
+  }
+
+  .block-content h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-section {
+    margin-top: 3rem;
+  }
+
+  .info-block {
+    padding: 2rem 1.5rem;
+    min-height: 350px;
+  }
+
+  .block-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hours-item {
+    padding: 1.2rem 1.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .hours-item:hover {
+    transform: translateX(0);
+    transform: scale(1.02);
+  }
+
+  .day,
+  .hours {
+    font-size: 1rem;
+  }
+
+  .map-placeholder {
+    min-height: 300px;
+    padding: 2rem 1.5rem;
+  }
+
+  .map-placeholder svg {
+    width: 60px;
+    height: 60px;
+  }
+
+  .map-placeholder p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-section {
+    margin-top: 2rem;
+  }
+
+  .info-block {
+    padding: 2rem 1rem;
+    min-height: 300px;
+  }
+
+  .block-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .hours-item {
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .day,
+  .hours {
+    font-size: 0.95rem;
+  }
+
+  .map-placeholder {
+    min-height: 250px;
+    padding: 1.5rem 1rem;
+  }
+
+  .map-placeholder svg {
+    width: 50px;
+    height: 50px;
+  }
+
+  .map-placeholder p {
+    font-size: 1rem;
+  }
+}
