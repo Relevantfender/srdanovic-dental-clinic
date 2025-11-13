@@ -48,14 +48,25 @@ export class ScrollIntroComponent implements AfterViewInit {
     const rawProgress = scrolledIntoView / totalScrollDistance;
     const scrollProgress = Math.min(Math.max(rawProgress, 0), 1);
 
-    // Logo continuously moves with scroll - starts from bottom, ends at center with offset
-    // More dramatic movement range for better visibility
-    const maxTranslateY = 200; // Start further down
+    // Logo animation tied to welcome text timing
+    const maxTranslateY = 200; // Start from bottom
+    const welcomeTextPosition = 0; // Center position where welcome text appears
+    const finalPosition = -100; // Continue moving up after welcome text is visible
     const maxOffsetX = window.innerWidth > 768 ? 50 : 0;
 
-    // Logo follows scroll directly - moves from bottom to center as you scroll
-    this.logoTranslateY = maxTranslateY * (1 - scrollProgress);
-    this.logoOffsetX = maxOffsetX * scrollProgress;
+    // Logo reaches welcome text position at 35% (when welcome text is 100% opacity)
+    // Then continues moving up
+    if (scrollProgress <= 0.35) {
+      // 0-35% scroll: Logo moves from bottom to welcome text position
+      const logoProgress = scrollProgress / 0.35;
+      this.logoTranslateY = maxTranslateY - (logoProgress * (maxTranslateY - welcomeTextPosition));
+      this.logoOffsetX = maxOffsetX * logoProgress;
+    } else {
+      // 35-100% scroll: Logo continues moving up past welcome text
+      const continueProgress = (scrollProgress - 0.35) / 0.65;
+      this.logoTranslateY = welcomeTextPosition - (continueProgress * (welcomeTextPosition - finalPosition));
+      this.logoOffsetX = maxOffsetX;
+    }
 
     // All elements reach full opacity by 50% scroll progress
     // Logo opacity: 0-20% scroll progress (very fast fade-in to ensure 100% visibility)
