@@ -11,6 +11,32 @@
   margin-top: 0;
 }
 
+/* Decorative corner borders */
+.scroll-intro::before,
+.scroll-intro::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-color: #D4AF37;
+  border-style: solid;
+  z-index: 1;
+}
+
+/* Upper right corner */
+.scroll-intro::before {
+  top: 20px;
+  right: 20px;
+  border-width: 3px 3px 0 0;
+}
+
+/* Lower left corner */
+.scroll-intro::after {
+  bottom: 20px;
+  left: 20px;
+  border-width: 0 0 3px 3px;
+}
+
 /* Content Container */
 .content-container {
   position: relative;
@@ -92,6 +118,22 @@
     padding: 3rem 1.5rem;
   }
 
+  .scroll-intro::before,
+  .scroll-intro::after {
+    width: 60px;
+    height: 60px;
+  }
+
+  .scroll-intro::before {
+    top: 15px;
+    right: 15px;
+  }
+
+  .scroll-intro::after {
+    bottom: 15px;
+    left: 15px;
+  }
+
   .welcome-text {
     font-size: 1.5rem;
   }
@@ -111,6 +153,22 @@
   .scroll-intro {
     min-height: 70vh;
     padding: 2rem 1rem;
+  }
+
+  .scroll-intro::before,
+  .scroll-intro::after {
+    width: 40px;
+    height: 40px;
+  }
+
+  .scroll-intro::before {
+    top: 10px;
+    right: 10px;
+  }
+
+  .scroll-intro::after {
+    bottom: 10px;
+    left: 10px;
   }
 
   .welcome-text {
