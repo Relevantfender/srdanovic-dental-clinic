@@ -53,7 +53,7 @@ export class ScrollIntroComponent implements AfterViewInit {
     const welcomeTextPosition = 0; // Center position where welcome text appears
     const isMobile = window.innerWidth <= 768;
     const finalPosition = isMobile ? -100 : -200; // Mobile goes to -100%, desktop to -200%
-    const maxOffsetX = isMobile ? 0 : 50;
+    const maxOffsetX = isMobile ? 0 : 280;
 
     // Logo reaches welcome text position at 35% (when welcome text is 100% opacity)
     // Then continues moving up in straight line
