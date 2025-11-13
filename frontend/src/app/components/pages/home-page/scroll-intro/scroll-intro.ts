@@ -51,20 +51,21 @@ export class ScrollIntroComponent implements AfterViewInit {
     // Logo animation tied to welcome text timing
     const maxTranslateY = 200; // Start from bottom
     const welcomeTextPosition = 0; // Center position where welcome text appears
-    const finalPosition = -100; // Continue moving up after welcome text is visible
-    const maxOffsetX = window.innerWidth > 768 ? 50 : 0;
+    const isMobile = window.innerWidth <= 768;
+    const finalPosition = isMobile ? -100 : -200; // Mobile goes to -100%, desktop to -200%
+    const maxOffsetX = isMobile ? 0 : 50;
 
     // Logo reaches welcome text position at 35% (when welcome text is 100% opacity)
-    // Then continues moving up
+    // Then continues moving up in straight line
     if (scrollProgress <= 0.35) {
       // 0-35% scroll: Logo moves from bottom to welcome text position
       const logoProgress = scrollProgress / 0.35;
       this.logoTranslateY = maxTranslateY - (logoProgress * (maxTranslateY - welcomeTextPosition));
       this.logoOffsetX = maxOffsetX * logoProgress;
     } else {
-      // 35-100% scroll: Logo continues moving up past welcome text
+      // 35-100% scroll: Logo continues moving up past welcome text in straight line
       const continueProgress = (scrollProgress - 0.35) / 0.65;
-      this.logoTranslateY = welcomeTextPosition - (continueProgress * (welcomeTextPosition - finalPosition));
+      this.logoTranslateY = welcomeTextPosition + (continueProgress * (finalPosition - welcomeTextPosition));
       this.logoOffsetX = maxOffsetX;
     }
 
@@ -73,7 +74,8 @@ export class ScrollIntroComponent implements AfterViewInit {
     if (scrollProgress < 0.2) {
       this.logoOpacity = scrollProgress / 0.2;
     } else {
-      this.logoOpacity = 1;
+      // On mobile, slightly reduce opacity (0.85), on desktop keep at 1
+      this.logoOpacity = isMobile ? 0.85 : 1;
     }
 
     // Welcome text: 15-35% scroll progress
