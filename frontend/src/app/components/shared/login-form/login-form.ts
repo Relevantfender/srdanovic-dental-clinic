@@ -13,10 +13,9 @@ export class LoginForm {
   @Output() close = new EventEmitter<void>();
 
   email: string = '';
-  password: string = '';
 
   onSubmit() {
-    console.log('Login submitted:', { email: this.email, password: this.password });
+    console.log('Login submitted:', { email: this.email });
     // Add your login logic here
   }
 
