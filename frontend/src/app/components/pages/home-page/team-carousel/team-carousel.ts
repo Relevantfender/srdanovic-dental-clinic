@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { trigger, transition, style, animate, state, keyframes } from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 interface TeamMember {
   name: string;
@@ -16,29 +16,20 @@ interface TeamMember {
   templateUrl: './team-carousel.html',
   styleUrl: './team-carousel.css',
   animations: [
-    trigger('slideLeft', [
-      transition('void => *', [])
-    ]),
-    trigger('slideRight', [
-      transition('void => *', [])
-    ]),
-    trigger('cardSlide', [
-      state('slideLeft', style({ transform: 'translateX(0)', opacity: 1 })),
-      state('slideRight', style({ transform: 'translateX(0)', opacity: 1 })),
-      transition('* => slideLeft', [
-        style({ transform: 'translateX(-100px)', opacity: 0 }),
-        animate('500ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+    trigger('slideInOut', [
+      transition(':increment', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('600ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
       ]),
-      transition('* => slideRight', [
-        style({ transform: 'translateX(100px)', opacity: 0 }),
-        animate('500ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      transition(':decrement', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('600ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
       ])
     ])
   ]
 })
 export class TeamCarousel {
   currentIndex: number = 0;
-  animationState: string = 'slideRight';
 
   teamMembers: TeamMember[] = [
     {
@@ -68,23 +59,13 @@ export class TeamCarousel {
   ];
 
   next(): void {
-    this.animationState = 'slideRight';
-    setTimeout(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.teamMembers.length;
-    }, 0);
+    this.currentIndex = (this.currentIndex + 1) % this.teamMembers.length;
   }
 
   previous(): void {
-    this.animationState = 'slideLeft';
-    setTimeout(() => {
-      this.currentIndex = this.currentIndex === 0
-        ? this.teamMembers.length - 1
-        : this.currentIndex - 1;
-    }, 0);
-  }
-
-  onAnimationDone(): void {
-    // Animation completed
+    this.currentIndex = this.currentIndex === 0
+      ? this.teamMembers.length - 1
+      : this.currentIndex - 1;
   }
 
   get currentMember(): TeamMember {
