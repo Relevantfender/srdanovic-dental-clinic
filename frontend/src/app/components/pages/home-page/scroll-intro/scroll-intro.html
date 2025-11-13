@@ -1,0 +1,32 @@
+<section class="scroll-intro">
+  <div class="content-container">
+    <!-- Logo -->
+    <div
+      class="logo-container"
+      [style.transform]="'translate(calc(-50% + ' + logoOffsetX + 'px), calc(-50% + ' + logoTranslateY + '%))'"
+      [style.opacity]="logoOpacity">
+      <img
+        src="logo-black.png"
+        alt="Dental Clinic Logo"
+        class="logo"
+      >
+    </div>
+
+    <!-- Welcome Text -->
+    <div
+      class="welcome-text"
+      [style.opacity]="welcomeOpacity">
+      Welcome to<br>
+      <span class="highlight">Srdanović Dental Clinic</span>
+    </div>
+
+    <!-- Description -->
+    <p
+      class="description-text"
+      [style.opacity]="descriptionOpacity">
+      A place where smiles and people matter. Experience exceptional dental care
+      delivered with precision, compassion, and the latest technology. Your journey
+      to a healthier, more confident smile begins here.
+    </p>
+  </div>
+</section>
