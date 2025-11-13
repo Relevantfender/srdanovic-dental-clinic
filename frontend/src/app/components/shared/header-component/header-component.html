@@ -104,9 +104,16 @@
 
       }
 
+      <!-- Phone Number -->
+      <div class="mobile-menu-item mobile-phone">
+        <a href="tel:+381664448435">{{ phoneNumber }}</a>
+      </div>
 
-    </ul>
-    <button>Request Appointment</button>
+      <!-- Login Button -->
+      <div class="mobile-menu-item mobile-appointment">
+        <button class="appointment-button" (click)="toggleLoginForm()">Login</button>
+      </div>
+    </nav>
   </div>
 
   <!-- Overlay -->
