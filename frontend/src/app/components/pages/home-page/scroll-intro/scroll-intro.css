@@ -29,7 +29,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-100%, -100%);
   z-index: 3;
   transition: none;
 }
@@ -38,6 +38,7 @@
   width: 200px;
   height: 200px;
   object-fit: contain;
+  opacity: 0.5;
 }
 
 /* Welcome Text */
