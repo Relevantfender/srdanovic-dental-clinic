@@ -39,18 +39,6 @@
   object-fit: contain;
 }
 
-/* Title Text - Appears after logo settles */
-.title-text {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  letter-spacing: 1px;
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
-  margin-top: 15rem;
-  z-index: 4;
-}
-
 /* Welcome Text */
 .welcome-text {
   font-size: 2rem;
@@ -59,6 +47,7 @@
   line-height: 1.6;
   opacity: 0;
   transition: opacity 0.5s ease-out;
+  margin-top: 15rem;
   z-index: 4;
 }
 
@@ -82,11 +71,6 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .title-text {
-    font-size: 2rem;
-    margin-top: 12rem;
-  }
-
   .welcome-text {
     font-size: 1.75rem;
   }
@@ -105,11 +89,6 @@
   .scroll-intro {
     min-height: 80vh;
     padding: 3rem 1.5rem;
-  }
-
-  .title-text {
-    font-size: 1.75rem;
-    margin-top: 10rem;
   }
 
   .welcome-text {
@@ -131,11 +110,6 @@
   .scroll-intro {
     min-height: 70vh;
     padding: 2rem 1rem;
-  }
-
-  .title-text {
-    font-size: 1.5rem;
-    margin-top: 8rem;
   }
 
   .welcome-text {

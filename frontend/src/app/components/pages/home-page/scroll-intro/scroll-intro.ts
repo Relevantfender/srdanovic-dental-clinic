@@ -9,9 +9,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './scroll-intro.css'
 })
 export class ScrollIntroComponent implements AfterViewInit {
-  logoTranslateY = 200;
+  logoTranslateY = 150;
   logoOpacity = 0;
-  titleOpacity = 0;
   welcomeOpacity = 0;
   descriptionOpacity = 0;
   logoOffsetX = 0;
@@ -35,21 +34,19 @@ export class ScrollIntroComponent implements AfterViewInit {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
 
-    // Calculate scroll progress: 0 when component enters bottom of viewport, 1 when it reaches middle
-    const componentMiddle = this.componentTop + (this.componentHeight / 2);
-    const viewportMiddle = scrollY + (windowHeight / 2);
+    // How far down the page we've scrolled (component's top position relative to viewport bottom)
+    const componentViewportPosition = this.componentTop - scrollY - windowHeight;
 
-    // Distance from when component first enters view to when it's at viewport middle
-    const startScroll = this.componentTop - windowHeight;
-    const endScroll = componentMiddle - (windowHeight / 2);
-    const scrollRange = endScroll - startScroll;
+    // Calculate scroll progress based on component visibility
+    // When component just enters view: progress = 0
+    // When component is centered in viewport: progress = 1
+    const scrollRange = windowHeight + (this.componentHeight / 2);
+    const scrollProgress = Math.min(Math.max(1 - (componentViewportPosition + windowHeight) / scrollRange, 0), 1);
 
-    const scrollProgress = Math.min(Math.max((scrollY - startScroll) / scrollRange, 0), 1);
-
-    // Logo pans in from 0-50% of scroll progress (starts from bottom, settles at center)
-    if (scrollProgress <= 0.5) {
-      const logoProgress = scrollProgress / 0.5;
-      this.logoTranslateY = 200 - (logoProgress * 200); // From bottom (+200%) to center (0%)
+    // Logo pans in from 0-60% of scroll progress (starts from bottom, settles at center)
+    if (scrollProgress <= 0.6) {
+      const logoProgress = scrollProgress / 0.6;
+      this.logoTranslateY = 150 - (logoProgress * 150); // From bottom (+150%) to center (0%)
       this.logoOpacity = logoProgress;
 
       // Logo moves to 50% right offset on desktop
@@ -64,29 +61,20 @@ export class ScrollIntroComponent implements AfterViewInit {
       this.logoOffsetX = window.innerWidth > 768 ? 50 : 0;
     }
 
-    // Title appears at 50-60% of scroll progress
-    if (scrollProgress < 0.5) {
-      this.titleOpacity = 0;
-    } else if (scrollProgress >= 0.5 && scrollProgress <= 0.6) {
-      this.titleOpacity = (scrollProgress - 0.5) / 0.1;
-    } else {
-      this.titleOpacity = 1;
-    }
-
-    // Welcome text appears at 60-70% of scroll progress
+    // Welcome text appears at 60-75% of scroll progress
     if (scrollProgress < 0.6) {
       this.welcomeOpacity = 0;
-    } else if (scrollProgress >= 0.6 && scrollProgress <= 0.7) {
-      this.welcomeOpacity = (scrollProgress - 0.6) / 0.1;
+    } else if (scrollProgress >= 0.6 && scrollProgress <= 0.75) {
+      this.welcomeOpacity = (scrollProgress - 0.6) / 0.15;
     } else {
       this.welcomeOpacity = 1;
     }
 
-    // Description appears at 70-80% of scroll progress
-    if (scrollProgress < 0.7) {
+    // Description appears at 75-90% of scroll progress
+    if (scrollProgress < 0.75) {
       this.descriptionOpacity = 0;
-    } else if (scrollProgress >= 0.7 && scrollProgress <= 0.8) {
-      this.descriptionOpacity = (scrollProgress - 0.7) / 0.1;
+    } else if (scrollProgress >= 0.75 && scrollProgress <= 0.9) {
+      this.descriptionOpacity = (scrollProgress - 0.75) / 0.15;
     } else {
       this.descriptionOpacity = 1;
     }
