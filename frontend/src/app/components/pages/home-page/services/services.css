@@ -2,6 +2,7 @@
   width: 100%;
   background-color: #f8f8f8;
   padding: 0;
+  margin-bottom: 55px;
 }
 
 /* Header Section */
@@ -96,8 +97,8 @@
 
 /* Round Gold Button */
 .service-button {
-  width: 150px;
-  height: 150px;
+  width:70px;
+  height: 70px;
   border-radius: 50%;
   background-color: #c19852;
   border: 3px solid #c19852;
