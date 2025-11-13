@@ -126,6 +126,11 @@
   transform: translateX(5px);
 }
 
+/* Left service arrow moves left on hover */
+.left-service .service-button:hover svg {
+  transform: translateX(-5px);
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .services-title {
