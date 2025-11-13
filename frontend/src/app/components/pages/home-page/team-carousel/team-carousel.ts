@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { trigger, transition, style, animate, state } from '@angular/animations';
+import { trigger, transition, style, animate, state, keyframes } from '@angular/animations';
 
 interface TeamMember {
   name: string;
@@ -16,18 +16,29 @@ interface TeamMember {
   templateUrl: './team-carousel.html',
   styleUrl: './team-carousel.css',
   animations: [
-    trigger('slideAnimation', [
-      transition('* => *', [
-        style({ opacity: 0, transform: '{{direction}}' }),
-        animate('500ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
-      ], { params: { direction: 'translateX(100px)' } })
+    trigger('slideLeft', [
+      transition('void => *', [])
+    ]),
+    trigger('slideRight', [
+      transition('void => *', [])
+    ]),
+    trigger('cardSlide', [
+      state('slideLeft', style({ transform: 'translateX(0)', opacity: 1 })),
+      state('slideRight', style({ transform: 'translateX(0)', opacity: 1 })),
+      transition('* => slideLeft', [
+        style({ transform: 'translateX(-100px)', opacity: 0 }),
+        animate('500ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ]),
+      transition('* => slideRight', [
+        style({ transform: 'translateX(100px)', opacity: 0 }),
+        animate('500ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
     ])
   ]
 })
 export class TeamCarousel {
   currentIndex: number = 0;
-  animationDirection: string = 'translateX(100px)';
-  animationState: number = 0;
+  animationState: string = 'slideRight';
 
   teamMembers: TeamMember[] = [
     {
@@ -57,17 +68,23 @@ export class TeamCarousel {
   ];
 
   next(): void {
-    this.animationDirection = 'translateX(100px)';
-    this.currentIndex = (this.currentIndex + 1) % this.teamMembers.length;
-    this.animationState++;
+    this.animationState = 'slideRight';
+    setTimeout(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.teamMembers.length;
+    }, 0);
   }
 
   previous(): void {
-    this.animationDirection = 'translateX(-100px)';
-    this.currentIndex = this.currentIndex === 0
-      ? this.teamMembers.length - 1
-      : this.currentIndex - 1;
-    this.animationState++;
+    this.animationState = 'slideLeft';
+    setTimeout(() => {
+      this.currentIndex = this.currentIndex === 0
+        ? this.teamMembers.length - 1
+        : this.currentIndex - 1;
+    }, 0);
+  }
+
+  onAnimationDone(): void {
+    // Animation completed
   }
 
   get currentMember(): TeamMember {

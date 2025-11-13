@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   min-height: 60vh;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,25 +16,26 @@
 .scroll-intro::after {
   content: '';
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-color: #D4AF37;
   border-style: solid;
-  z-index: 1;
+  z-index: 10;
+  pointer-events: none;
 }
 
 /* Upper right corner */
 .scroll-intro::before {
   top: 20px;
   right: 20px;
-  border-width: 3px 3px 0 0;
+  border-width: 4px 4px 0 0;
 }
 
 /* Lower left corner */
 .scroll-intro::after {
   bottom: 20px;
   left: 20px;
-  border-width: 0 0 3px 3px;
+  border-width: 0 0 4px 4px;
 }
 
 /* Content Container */
