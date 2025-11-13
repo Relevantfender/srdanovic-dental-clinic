@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 interface TeamMember {
   name: string;
@@ -13,7 +14,19 @@ interface TeamMember {
   imports: [CommonModule],
   standalone: true,
   templateUrl: './team-carousel.html',
-  styleUrl: './team-carousel.css'
+  styleUrl: './team-carousel.css',
+  animations: [
+    trigger('cardAnimation', [
+      transition(':increment', [
+        style({ opacity: 0, transform: 'translateX(100px)' }),
+        animate('400ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+      ]),
+      transition(':decrement', [
+        style({ opacity: 0, transform: 'translateX(-100px)' }),
+        animate('400ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+      ])
+    ])
+  ]
 })
 export class TeamCarousel {
   currentIndex: number = 0;
