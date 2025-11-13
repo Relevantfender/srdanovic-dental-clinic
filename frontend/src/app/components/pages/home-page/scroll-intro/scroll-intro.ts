@@ -55,21 +55,32 @@ export class ScrollIntroComponent implements AfterViewInit {
 
     // Logo follows scroll directly - moves from bottom to center as you scroll
     this.logoTranslateY = maxTranslateY * (1 - scrollProgress);
-    this.logoOpacity = Math.min(scrollProgress * 2, 1); // Fade in faster
     this.logoOffsetX = maxOffsetX * scrollProgress;
 
-    // Welcome text appears smoothly after logo is mostly in place
-    if (scrollProgress < 0.5) {
-      this.welcomeOpacity = 0;
+    // All elements reach full opacity by 50% scroll progress
+    // Logo opacity: 0-40% scroll progress
+    if (scrollProgress < 0.4) {
+      this.logoOpacity = scrollProgress / 0.4;
     } else {
-      this.welcomeOpacity = Math.min((scrollProgress - 0.5) * 2, 1);
+      this.logoOpacity = 1;
     }
 
-    // Description appears after welcome text
-    if (scrollProgress < 0.7) {
-      this.descriptionOpacity = 0;
+    // Welcome text: 20-40% scroll progress
+    if (scrollProgress < 0.2) {
+      this.welcomeOpacity = 0;
+    } else if (scrollProgress < 0.4) {
+      this.welcomeOpacity = (scrollProgress - 0.2) / 0.2;
     } else {
-      this.descriptionOpacity = Math.min((scrollProgress - 0.7) * 2.5, 1);
+      this.welcomeOpacity = 1;
+    }
+
+    // Description: 30-50% scroll progress
+    if (scrollProgress < 0.3) {
+      this.descriptionOpacity = 0;
+    } else if (scrollProgress < 0.5) {
+      this.descriptionOpacity = (scrollProgress - 0.3) / 0.2;
+    } else {
+      this.descriptionOpacity = 1;
     }
   }
 
