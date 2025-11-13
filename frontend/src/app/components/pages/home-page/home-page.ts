@@ -5,6 +5,7 @@ import { AboutExcerptComponent } from './about-excerpt/about-excerpt';
 import { ServicesComponent } from './services/services';
 import { ContentBlocksComponent } from './content-blocks/content-blocks';
 import { InfoSectionComponent } from './info-section/info-section';
+import {TeamCarousel} from './team-carousel/team-carousel';
 
 @Component({
   selector: 'app-home-page',
@@ -14,7 +15,8 @@ import { InfoSectionComponent } from './info-section/info-section';
     AboutExcerptComponent,
     ServicesComponent,
     ContentBlocksComponent,
-    InfoSectionComponent
+    InfoSectionComponent,
+    TeamCarousel
   ],
   standalone:true,
   templateUrl: './home-page.html',
