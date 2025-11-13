@@ -1,8 +1,8 @@
 <div class="team-carousel-container">
   <h2 class="carousel-title">Meet our team</h2>
 
-  <div class="carousel-card">
-    <div class="card-content" [@carouselSlide]="{value: animationCounter, params: {slideFrom: slideDirection}}">
+  <div class="carousel-card" [@carouselSlide]="{value: animationCounter, params: {slideFrom: slideDirection}}">
+    <div class="card-content">
       <div class="left-content">
         <h3 class="member-name">{{ currentMember.name }}</h3>
         <h4 class="member-title">{{ currentMember.title }}</h4>
