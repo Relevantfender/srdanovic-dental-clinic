@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Banner} from './banner/banner';
 import { ScrollIntroComponent } from './scroll-intro/scroll-intro';
 import { AboutExcerptComponent } from './about-excerpt/about-excerpt';
+import { ServicesComponent } from './services/services';
 import { ContentBlocksComponent } from './content-blocks/content-blocks';
 import { InfoSectionComponent } from './info-section/info-section';
 
@@ -11,6 +12,7 @@ import { InfoSectionComponent } from './info-section/info-section';
     Banner,
     ScrollIntroComponent,
     AboutExcerptComponent,
+    ServicesComponent,
     ContentBlocksComponent,
     InfoSectionComponent
   ],
