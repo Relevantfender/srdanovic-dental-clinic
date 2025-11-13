@@ -1,0 +1,170 @@
+.about-excerpt {
+  padding: 5rem 0;
+  background-color: #f8f8f8;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* Left Side - Text Content */
+.text-content {
+  padding-right: 2rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #c19852;
+  margin-top: 1rem;
+}
+
+.about-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 2rem;
+  text-align: justify;
+}
+
+.learn-more-btn {
+  padding: 0.75rem 2rem;
+  background-color: #c19852;
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.learn-more-btn:hover {
+  background-color: transparent;
+  color: #c19852;
+  border: 2px solid #c19852;
+}
+
+/* Right Side - Images */
+.images-content {
+  position: relative;
+  height: 500px;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.image-large {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 75%;
+  height: 90%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.image-small {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 55%;
+  height: 65%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 5px solid white;
+  z-index: 2;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .text-content {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .section-title::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+
+  .images-content {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-excerpt {
+    padding: 3rem 0;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .about-text {
+    font-size: 1rem;
+  }
+
+  .images-content {
+    height: 350px;
+  }
+
+  .image-large {
+    width: 75%;
+    height: 75%;
+  }
+
+  .image-small {
+    width: 60%;
+    height: 55%;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .images-content {
+    height: 300px;
+  }
+}

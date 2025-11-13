@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Banner} from './banner/banner';
+import { AboutExcerptComponent } from './about-excerpt/about-excerpt';
 import { ContentBlocksComponent } from './content-blocks/content-blocks';
 import { InfoSectionComponent } from './info-section/info-section';
 
@@ -7,6 +8,7 @@ import { InfoSectionComponent } from './info-section/info-section';
   selector: 'app-home-page',
   imports: [
     Banner,
+    AboutExcerptComponent,
     ContentBlocksComponent,
     InfoSectionComponent
   ],
