@@ -17,6 +17,7 @@ interface NavItem {
   styleUrl: './header-component.css'
 })
 export class HeaderComponent {
+  isMenuOpen = false;
   showLoginForm = false;
   isScrolled = false;
   isMobileMenuOpen = false;
@@ -96,6 +97,9 @@ export class HeaderComponent {
     this.showLoginForm = !this.showLoginForm;
   }
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
   closeLoginForm() {
     this.showLoginForm = false;
   }

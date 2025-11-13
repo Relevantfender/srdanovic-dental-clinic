@@ -515,3 +515,79 @@ header.scrolled .dropdown {
     display: none !important;
   }
 }
+/* Hamburger Menu Styles */
+.navbar-toggler {
+  display: none;
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.navbar-toggler-icon {
+  display: block;
+  position: relative;
+  width: 25px;
+  height: 2px;
+  background-color: white;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 25px;
+  height: 2px;
+  background-color: white;
+  transition: transform 0.3s ease, top 0.3s ease, bottom 0.3s ease;
+}
+
+.navbar-toggler-icon::before {
+  top: -8px;
+}
+
+.navbar-toggler-icon::after {
+  bottom: -8px;
+}
+
+/* X icon when active */
+.navbar-toggler.active .navbar-toggler-icon {
+  background-color: transparent;
+}
+
+.navbar-toggler.active .navbar-toggler-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.navbar-toggler.active .navbar-toggler-icon::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .navbar-toggler {
+    display: block;
+  }
+
+  .content {
+    display: none;
+  }
+}
+
+/*li::after{*/
+/*  content: "";*/
+/*  display: inline-block;*/
+/*  width: 0;*/
+/*  height: 0;*/
+/*  vertical-align: middle;*/
+/*  margin-left: 0.5em;*/
+/*  border-left: 5px solid transparent;*/
+/*  border-right: 5px solid transparent;*/
+/*  border-top: 5px solid currentColor;*/
+/*}*/
