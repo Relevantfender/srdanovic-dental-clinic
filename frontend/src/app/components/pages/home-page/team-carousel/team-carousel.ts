@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { trigger, transition, style, animate, state } from '@angular/animations';
 
 interface TeamMember {
   name: string;
@@ -16,20 +16,25 @@ interface TeamMember {
   templateUrl: './team-carousel.html',
   styleUrl: './team-carousel.css',
   animations: [
-    trigger('slideInOut', [
-      transition(':increment', [
+    trigger('slide', [
+      transition('void => slideLeft', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('600ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ]),
+      transition('void => slideRight', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
         animate('600ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
       ]),
-      transition(':decrement', [
-        style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate('600ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      transition('* => void', [
+        animate('600ms ease-out', style({ transform: 'translateX(100%)', opacity: 0 }))
       ])
     ])
   ]
 })
 export class TeamCarousel {
   currentIndex: number = 0;
+  direction: string = 'slideRight';
+  showCard: boolean = true;
 
   teamMembers: TeamMember[] = [
     {
@@ -59,13 +64,23 @@ export class TeamCarousel {
   ];
 
   next(): void {
-    this.currentIndex = (this.currentIndex + 1) % this.teamMembers.length;
+    this.direction = 'slideRight';
+    this.showCard = false;
+    setTimeout(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.teamMembers.length;
+      this.showCard = true;
+    }, 100);
   }
 
   previous(): void {
-    this.currentIndex = this.currentIndex === 0
-      ? this.teamMembers.length - 1
-      : this.currentIndex - 1;
+    this.direction = 'slideLeft';
+    this.showCard = false;
+    setTimeout(() => {
+      this.currentIndex = this.currentIndex === 0
+        ? this.teamMembers.length - 1
+        : this.currentIndex - 1;
+      this.showCard = true;
+    }, 100);
   }
 
   get currentMember(): TeamMember {
