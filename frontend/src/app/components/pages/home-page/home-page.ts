@@ -6,7 +6,6 @@ import { ServicesComponent } from './services/services';
 import { TeamCarousel } from './team-carousel/team-carousel';
 import { ContentBlocksComponent } from './content-blocks/content-blocks';
 import { InfoSectionComponent } from './info-section/info-section';
-import {TeamCarousel} from './team-carousel/team-carousel';
 
 @Component({
   selector: 'app-home-page',
@@ -17,8 +16,7 @@ import {TeamCarousel} from './team-carousel/team-carousel';
     ServicesComponent,
     TeamCarousel,
     ContentBlocksComponent,
-    InfoSectionComponent,
-    TeamCarousel
+    InfoSectionComponent
   ],
   standalone:true,
   templateUrl: './home-page.html',
