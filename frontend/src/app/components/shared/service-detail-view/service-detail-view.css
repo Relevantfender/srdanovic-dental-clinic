@@ -1,7 +1,7 @@
 .detail-view-container {
   width: 100%;
   min-height: 500px;
-  background-color: #000;
+  background-color: white;
   padding: 60px 20px;
   display: flex;
   justify-content: center;
@@ -19,8 +19,31 @@
   justify-content: center;
   align-items: center;
   padding: 80px 60px;
-  border: 2px solid #D4AF37;
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+  border: none;
+}
+
+/* Upper right corner border */
+.detail-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  border-top: 2px solid #D4AF37;
+  border-right: 2px solid #D4AF37;
+}
+
+/* Lower left corner border */
+.detail-content::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  border-bottom: 2px solid #D4AF37;
+  border-left: 2px solid #D4AF37;
 }
 
 .corner-image {
@@ -73,6 +96,7 @@
 
 /* Placeholder State */
 .placeholder-content {
+  position: relative;
   background: white;
   min-width: 600px;
   min-height: 400px;
@@ -82,8 +106,31 @@
   justify-content: center;
   align-items: center;
   padding: 60px;
-  border: 2px solid #D4AF37;
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+  border: none;
+}
+
+/* Upper right corner border for placeholder */
+.placeholder-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  border-top: 2px solid #D4AF37;
+  border-right: 2px solid #D4AF37;
+}
+
+/* Lower left corner border for placeholder */
+.placeholder-content::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  border-bottom: 2px solid #D4AF37;
+  border-left: 2px solid #D4AF37;
 }
 
 .placeholder-text {
