@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -18,6 +18,7 @@ export interface ServiceItem {
 export class ServiceCarouselComponent {
   @Input() services: ServiceItem[] = [];
   @Input() title: string = 'Our Services';
+  @Output() serviceSelected = new EventEmitter<ServiceItem>();
 
   currentIndex = signal(0);
   isAnimating = signal(false);
@@ -81,5 +82,10 @@ export class ServiceCarouselComponent {
   goToSlide(index: number): void {
     if (this.isAnimating()) return;
     this.currentIndex.set(index);
+  }
+
+  onServiceClick(service: ServiceItem, event: Event): void {
+    event.preventDefault();
+    this.serviceSelected.emit(service);
   }
 }

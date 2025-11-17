@@ -29,4 +29,10 @@
 <app-service-carousel
   [services]="aestheticServices"
   [title]="'Explore Our Aesthetic Services'"
+  (serviceSelected)="onServiceSelected($event)"
 ></app-service-carousel>
+
+<!-- Service Detail View Section -->
+<app-service-detail-view
+  [selectedService]="selectedServiceDetail"
+></app-service-detail-view>
