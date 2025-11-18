@@ -27,6 +27,15 @@
   background-repeat: no-repeat;
 }
 
+/* Initial animation states */
+.hours-block {
+  transform: translateX(-100%);
+}
+
+.map-block {
+  transform: translateX(100%);
+}
+
 /* Background overlay effect for grayed images */
 .hours-block::before {
   content: '';
