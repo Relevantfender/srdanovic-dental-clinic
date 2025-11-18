@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServiceCarouselComponent, ServiceItem } from '../../shared/service-carousel/service-carousel';
 import { ServiceDetailViewComponent, ServiceDetail } from '../../shared/service-detail-view/service-detail-view';
@@ -12,6 +12,7 @@ import { getServicesByCategory } from '../../../data/services.data';
   styleUrl: './aesthetic-medicine-page.css'
 })
 export class AestheticMedicinePage {
+  @ViewChild('serviceDetailView', { read: ElementRef }) serviceDetailView?: ElementRef;
   selectedServiceDetail: ServiceDetail | null = null;
 
   // Load services from centralized data
@@ -40,5 +41,15 @@ export class AestheticMedicinePage {
 
   onServiceSelected(service: ServiceItem): void {
     this.selectedServiceDetail = this.serviceDetailsMap[service.name] || null;
+
+    // Scroll to service detail view after selection
+    setTimeout(() => {
+      if (this.serviceDetailView) {
+        this.serviceDetailView.nativeElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 100);
   }
 }
