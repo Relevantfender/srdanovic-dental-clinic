@@ -10,6 +10,8 @@
   background-color: #000000;
   padding: 3rem 2rem;
   text-align: center;
+  opacity: 0;
+  transform: translateY(-100px);
 }
 
 .services-title {
@@ -35,6 +37,17 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+/* Initial animation states */
+.left-service {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.right-service {
+  opacity: 0;
+  transform: translateX(100%);
 }
 
 /* Service Image Container */
