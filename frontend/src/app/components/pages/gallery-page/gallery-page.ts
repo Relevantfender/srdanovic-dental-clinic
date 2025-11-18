@@ -52,4 +52,20 @@ export class GalleryPage implements OnInit {
   get currentImage() {
     return this.selectedPatient?.detailImages[this.currentImageIndex];
   }
+
+  previousPatient() {
+    if (this.selectedPatient) {
+      const currentIndex = this.patients.findIndex(p => p.id === this.selectedPatient!.id);
+      const previousIndex = (currentIndex - 1 + this.patients.length) % this.patients.length;
+      this.openPatientGallery(this.patients[previousIndex]);
+    }
+  }
+
+  nextPatient() {
+    if (this.selectedPatient) {
+      const currentIndex = this.patients.findIndex(p => p.id === this.selectedPatient!.id);
+      const nextIndex = (currentIndex + 1) % this.patients.length;
+      this.openPatientGallery(this.patients[nextIndex]);
+    }
+  }
 }
