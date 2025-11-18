@@ -15,7 +15,15 @@ export const routes: Routes = [
     component: AestheticMedicinePage
   },
   {
+    path: 'aesthetic-medicine/:service',
+    component: AestheticMedicinePage
+  },
+  {
     path: 'dentistry',
+    component: DentistryPage
+  },
+  {
+    path: 'dentistry/:service',
     component: DentistryPage
   },
   {
