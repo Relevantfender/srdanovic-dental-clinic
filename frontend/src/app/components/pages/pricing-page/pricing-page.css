@@ -137,6 +137,18 @@
   color: #D4AF37;
 }
 
+/* Content Wrapper */
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Services Section */
+.services-section {
+  min-height: 200px;
+}
+
 /* Services View */
 .services-view {
   display: flex;

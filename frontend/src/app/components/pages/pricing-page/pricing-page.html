@@ -33,57 +33,62 @@
       </button>
     </div>
 
-    <!-- Services View (Specializations) -->
-    @if (selectedCategoryId) {
-      <div class="services-view">
-        @for (specialization of getSelectedCategory()?.specializations; track specialization.id) {
-          <div class="specialization-section">
-            <!-- Specialization Header -->
-            <button
-              class="specialization-header"
-              (click)="toggleSpecialization(specialization.id)">
-              <h3>{{ specialization.name }}</h3>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                [class.rotated]="isSpecializationExpanded(specialization.id)">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
+    <!-- Content Wrapper for Services and Calculator -->
+    <div class="content-wrapper">
+      <!-- Services View (Specializations) -->
+      <div class="services-section">
+        @if (selectedCategoryId) {
+          <div class="services-view">
+            @for (specialization of getSelectedCategory()?.specializations; track specialization.id) {
+              <div class="specialization-section">
+                <!-- Specialization Header -->
+                <button
+                  class="specialization-header"
+                  (click)="toggleSpecialization(specialization.id)">
+                  <h3>{{ specialization.name }}</h3>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    [class.rotated]="isSpecializationExpanded(specialization.id)">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
 
-            <!-- Items -->
-            @if (isSpecializationExpanded(specialization.id)) {
-              <div class="items-list">
-                @for (item of specialization.items; track item.id) {
-                  <div
-                    class="price-item"
-                    (click)="addToCart(item, specialization, getSelectedCategory()!)">
-                    <span class="item-name">{{ item.name }}</span>
-                    <div class="item-right">
-                      <span class="item-price">€{{ item.price }}</span>
-                      @if (isItemInCart(item.id)) {
-                        <svg
-                          class="checkmark"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="3"
-                          stroke-linecap="round"
-                          stroke-linejoin="round">
-                          <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                      }
-                    </div>
+                <!-- Items -->
+                @if (isSpecializationExpanded(specialization.id)) {
+                  <div class="items-list">
+                    @for (item of specialization.items; track item.id) {
+                      <div
+                        class="price-item"
+                        (click)="addToCart(item, specialization, getSelectedCategory()!)">
+                        <span class="item-name">{{ item.name }}</span>
+                        <div class="item-right">
+                          <span class="item-price">€{{ item.price }}</span>
+                          @if (isItemInCart(item.id)) {
+                            <svg
+                              class="checkmark"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="20"
+                              height="20"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round">
+                              <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                          }
+                        </div>
+                      </div>
+                    }
                   </div>
                 }
               </div>
@@ -91,62 +96,62 @@
           </div>
         }
       </div>
-    }
 
-    <!-- Calculator/Cart View (at bottom) -->
-    @if (showCalculator) {
-      <div class="calculator-view">
-        @if (cart.length === 0) {
-          <div class="empty-cart">
-            <p>No items selected</p>
-            <button class="back-to-services" (click)="toggleCalculator()">
-              Hide Calculator
-            </button>
-          </div>
-        } @else {
-          <div class="cart-content">
-            <!-- Cart Items -->
-            <div class="cart-items">
-              @for (cartItem of cart; track cartItem.item.id) {
-                <div class="cart-item">
-                  <div class="cart-item-info">
-                    <span class="cart-item-name">{{ cartItem.item.name }}</span>
-                    <span class="cart-item-category">{{ cartItem.specialization }}</span>
-                  </div>
-                  <div class="cart-item-right">
-                    <button
-                      class="cart-item-quantity-btn"
-                      (click)="openQuantityDialog(cartItem, $event)">
-                      {{ cartItem.quantity }}x
-                    </button>
-                    <span class="cart-item-price">€{{ cartItem.item.price * cartItem.quantity }}</span>
-                    <button
-                      class="remove-btn"
-                      (click)="removeFromCart(cartItem)">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="3 6 5 6 21 6"></polyline>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              }
+      <!-- Calculator/Cart View (always below services) -->
+      @if (showCalculator) {
+        <div class="calculator-view">
+          @if (cart.length === 0) {
+            <div class="empty-cart">
+              <p>No items selected</p>
+              <button class="back-to-services" (click)="toggleCalculator()">
+                Hide Calculator
+              </button>
             </div>
+          } @else {
+            <div class="cart-content">
+              <!-- Cart Items -->
+              <div class="cart-items">
+                @for (cartItem of cart; track cartItem.item.id) {
+                  <div class="cart-item">
+                    <div class="cart-item-info">
+                      <span class="cart-item-name">{{ cartItem.item.name }}</span>
+                      <span class="cart-item-category">{{ cartItem.specialization }}</span>
+                    </div>
+                    <div class="cart-item-right">
+                      <button
+                        class="cart-item-quantity-btn"
+                        (click)="openQuantityDialog(cartItem, $event)">
+                        {{ cartItem.quantity }}x
+                      </button>
+                      <span class="cart-item-price">€{{ cartItem.item.price * cartItem.quantity }}</span>
+                      <button
+                        class="remove-btn"
+                        (click)="removeFromCart(cartItem)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="3 6 5 6 21 6"></polyline>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                }
+              </div>
 
-            <!-- Total Section -->
-            <div class="cart-total">
-              <span class="total-label">Total</span>
-              <span class="total-amount">€{{ getTotalPrice() }}</span>
+              <!-- Total Section -->
+              <div class="cart-total">
+                <span class="total-label">Total</span>
+                <span class="total-amount">€{{ getTotalPrice() }}</span>
+              </div>
+
+              <!-- Discard All Button -->
+              <button class="discard-all-btn" (click)="discardAll()">
+                Discard All Items
+              </button>
             </div>
-
-            <!-- Discard All Button -->
-            <button class="discard-all-btn" (click)="discardAll()">
-              Discard All Items
-            </button>
-          </div>
-        }
-      </div>
-    }
+          }
+        </div>
+      }
+    </div>
   </div>
 
   <!-- Quantity Editor Dialog -->
