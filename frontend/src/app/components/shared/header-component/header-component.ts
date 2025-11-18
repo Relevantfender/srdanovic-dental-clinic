@@ -90,7 +90,7 @@ export class HeaderComponent {
     }
   ];
 
-  phoneNumber = '(+3816) 64 44 86 435';
+  phoneNumber = '(+381) 64 44 86 435';
 
   toggleLoginForm() {
     this.showLoginForm = !this.showLoginForm;
