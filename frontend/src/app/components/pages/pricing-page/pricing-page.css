@@ -35,8 +35,27 @@
 .view-switcher {
   display: flex;
   gap: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   justify-content: center;
+  align-items: center;
+}
+
+.view-label {
+  color: #D4AF37;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  position: relative;
+}
+
+.view-label::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #D4AF37;
 }
 
 .view-btn {
@@ -80,57 +99,50 @@
   color: #D4AF37;
 }
 
+/* Category Selector */
+.category-selector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  justify-content: center;
+}
+
+.category-btn {
+  background-color: transparent;
+  border: none;
+  color: #555555;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.category-btn.active {
+  color: #D4AF37;
+}
+
+.category-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #D4AF37;
+}
+
+.category-btn:hover {
+  color: #D4AF37;
+}
+
 /* Services View */
 .services-view {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-}
-
-/* Category Section */
-.category-section {
-  border: 2px solid #e0e0e0;
-  overflow: hidden;
-}
-
-.category-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  background-color: #f5f5f5;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.category-header:hover {
-  background-color: #ececec;
-}
-
-.category-header h2 {
-  font-size: 1.8rem;
-  color: #333333;
-  margin: 0;
-  font-weight: 600;
-}
-
-.category-header svg {
-  color: #D4AF37;
-  transition: transform 0.3s ease;
-}
-
-.category-header svg.rotated {
-  transform: rotate(180deg);
-}
-
-/* Specializations */
-.specializations {
-  padding: 1rem 2rem 2rem;
-  display: flex;
-  flex-direction: column;
   gap: 1.5rem;
+  margin-left: 2rem;
 }
 
 /* Specialization Section */
