@@ -56,7 +56,6 @@
 .employee-image {
   width: 120px;
   height: 120px;
-  border-radius: 50%;
   object-fit: cover;
   border: 3px solid #D4AF37;
   margin-bottom: 15px;
@@ -64,7 +63,7 @@
 }
 
 .employee-card:hover .employee-image {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .employee-card.active .employee-image {
