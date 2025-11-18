@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 })
 export class ServicesComponent implements AfterViewInit {
   @ViewChild('servicesSection') servicesSection!: ElementRef<HTMLElement>;
-  @ViewChild('servicesHeader') servicesHeader!: ElementRef<HTMLElement>;
+  @ViewChild('servicesTitle') servicesTitle!: ElementRef<HTMLElement>;
   @ViewChild('leftService') leftService!: ElementRef<HTMLElement>;
   @ViewChild('rightService') rightService!: ElementRef<HTMLElement>;
 
@@ -39,37 +39,35 @@ export class ServicesComponent implements AfterViewInit {
   }
 
   private triggerAnimations(): void {
-    // Header animation - comes from top
-    const headerElement = this.servicesHeader.nativeElement;
-    headerElement.animate(
+    // Title text animation - fades in
+    const titleElement = this.servicesTitle.nativeElement;
+    titleElement.animate(
       [
-        { offset: 0, transform: 'translateY(-100px)', opacity: 0 },
-        { offset: 0.5, transform: 'translateY(-50px)', opacity: 0.5 },
-        { offset: 1, transform: 'translateY(0)', opacity: 1 }
+        { offset: 0, opacity: 0 },
+        { offset: 0.5, opacity: 0.5 },
+        { offset: 1, opacity: 1 }
       ],
       { duration: 900, fill: 'forwards', easing: 'ease-out' }
     );
 
-    // Left service - comes from left to center, then continues left
+    // Left service - slides from left and stays glued
     const leftElement = this.leftService.nativeElement;
     leftElement.animate(
       [
-        { offset: 0, transform: 'translateX(-100%)', opacity: 0 },
-        { offset: 0.5, transform: 'translateX(0)', opacity: 1 },
-        { offset: 1, transform: 'translateX(-20px)', opacity: 0.8 }
+        { offset: 0, transform: 'translateX(-100%)' },
+        { offset: 1, transform: 'translateX(0)' }
       ],
-      { duration: 2000, fill: 'forwards', easing: 'ease-in-out', delay: 200 }
+      { duration: 1500, fill: 'forwards', easing: 'ease-out', delay: 200 }
     );
 
-    // Right service - comes from right to center, then continues right
+    // Right service - slides from right and stays glued
     const rightElement = this.rightService.nativeElement;
     rightElement.animate(
       [
-        { offset: 0, transform: 'translateX(100%)', opacity: 0 },
-        { offset: 0.5, transform: 'translateX(0)', opacity: 1 },
-        { offset: 1, transform: 'translateX(20px)', opacity: 0.8 }
+        { offset: 0, transform: 'translateX(100%)' },
+        { offset: 1, transform: 'translateX(0)' }
       ],
-      { duration: 2000, fill: 'forwards', easing: 'ease-in-out', delay: 200 }
+      { duration: 1500, fill: 'forwards', easing: 'ease-out', delay: 200 }
     );
   }
 }

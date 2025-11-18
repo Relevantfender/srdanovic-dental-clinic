@@ -10,8 +10,6 @@
   background-color: #000000;
   padding: 3rem 2rem;
   text-align: center;
-  opacity: 0;
-  transform: translateY(-100px);
 }
 
 .services-title {
@@ -21,6 +19,7 @@
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 3px;
+  opacity: 0;
 }
 
 /* Services Blocks Container */
@@ -29,6 +28,7 @@
   grid-template-columns: 1fr 1fr;
   height: 70vh;
   min-height: 500px;
+  background-color: #000000;
 }
 
 /* Individual Service Block */
@@ -41,12 +41,10 @@
 
 /* Initial animation states */
 .left-service {
-  opacity: 0;
   transform: translateX(-100%);
 }
 
 .right-service {
-  opacity: 0;
   transform: translateX(100%);
 }
 
