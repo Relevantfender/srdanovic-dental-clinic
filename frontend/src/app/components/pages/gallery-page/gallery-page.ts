@@ -1,9 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface GalleryImage {
-  id: number;
-}
+import { GalleryService, PatientGallery } from '../../../services/gallery.service';
 
 @Component({
   selector: 'app-gallery-page',
@@ -12,29 +9,47 @@ interface GalleryImage {
   templateUrl: './gallery-page.html',
   styleUrl: './gallery-page.css'
 })
-export class GalleryPage {
-  galleryImages: GalleryImage[] = [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-    { id: 12 }
-  ];
+export class GalleryPage implements OnInit {
+  private galleryService = inject(GalleryService);
 
-  selectedImage: GalleryImage | null = null;
+  patients: PatientGallery[] = [];
+  selectedPatient: PatientGallery | null = null;
+  currentImageIndex = 0;
 
-  openImage(image: GalleryImage) {
-    this.selectedImage = image;
+  ngOnInit() {
+    this.patients = this.galleryService.getAllPatients();
   }
 
-  closeImage() {
-    this.selectedImage = null;
+  openPatientGallery(patient: PatientGallery) {
+    this.selectedPatient = patient;
+    this.currentImageIndex = 0;
+  }
+
+  closeLightbox() {
+    this.selectedPatient = null;
+    this.currentImageIndex = 0;
+  }
+
+  selectImage(index: number) {
+    this.currentImageIndex = index;
+  }
+
+  previousImage() {
+    if (this.selectedPatient) {
+      this.currentImageIndex =
+        (this.currentImageIndex - 1 + this.selectedPatient.detailImages.length) %
+        this.selectedPatient.detailImages.length;
+    }
+  }
+
+  nextImage() {
+    if (this.selectedPatient) {
+      this.currentImageIndex =
+        (this.currentImageIndex + 1) % this.selectedPatient.detailImages.length;
+    }
+  }
+
+  get currentImage() {
+    return this.selectedPatient?.detailImages[this.currentImageIndex];
   }
 }

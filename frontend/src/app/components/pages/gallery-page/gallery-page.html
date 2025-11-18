@@ -21,33 +21,97 @@
   <!-- Gallery Grid Section -->
   <div class="gallery-grid-section">
     <div class="gallery-grid">
-      @for (image of galleryImages; track image.id) {
-        <div class="gallery-item" (click)="openImage(image)">
-          <div class="image-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-            </svg>
-            <p>Gallery Image {{ image.id }}</p>
+      @for (patient of patients; track patient.id) {
+        <div class="gallery-item" (click)="openPatientGallery(patient)">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img [src]="patient.thumbnailImage" [alt]="patient.patientName" />
+              </div>
+              <div class="flip-card-back">
+                <img [src]="patient.smileImage" [alt]="patient.patientName + ' smile'" />
+              </div>
+            </div>
           </div>
         </div>
       }
     </div>
   </div>
 
-  @if (selectedImage) {
-    <div class="lightbox" (click)="closeImage()">
+  @if (selectedPatient) {
+    <div class="lightbox" (click)="closeLightbox()">
       <div class="lightbox-content" (click)="$event.stopPropagation()">
-        <button class="close-btn" (click)="closeImage()">
+        <button class="close-btn" (click)="closeLightbox()">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
-        <div class="lightbox-image">
-          <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-          </svg>
-          <p>Gallery Image {{ selectedImage.id }}</p>
+
+        <!-- Desktop Layout -->
+        <div class="lightbox-desktop">
+          <!-- Navigation Arrow Left -->
+          <button class="nav-arrow nav-arrow-left" (click)="previousImage()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Main Image -->
+          <div class="lightbox-main-image">
+            <img [src]="currentImage?.url" [alt]="currentImage?.alt" />
+          </div>
+
+          <!-- Navigation Arrow Right -->
+          <button class="nav-arrow nav-arrow-right" (click)="nextImage()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Thumbnail Strip -->
+          <div class="thumbnail-strip">
+            @for (image of selectedPatient.detailImages; track $index) {
+              <div class="thumbnail-item"
+                   [class.active]="currentImageIndex === $index"
+                   (click)="selectImage($index)">
+                <img [src]="image.url" [alt]="image.alt" />
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Mobile Layout -->
+        <div class="lightbox-mobile">
+          <!-- Thumbnails on Top -->
+          <div class="mobile-thumbnails">
+            @for (image of selectedPatient.detailImages; track $index) {
+              <div class="mobile-thumbnail"
+                   [class.active]="currentImageIndex === $index"
+                   (click)="selectImage($index)">
+                <img [src]="image.url" [alt]="image.alt" />
+              </div>
+            }
+          </div>
+
+          <!-- Main Carousel Below -->
+          <div class="mobile-carousel">
+            <button class="mobile-nav-btn mobile-nav-left" (click)="previousImage()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+
+            <div class="mobile-main-image">
+              <img [src]="currentImage?.url" [alt]="currentImage?.alt" />
+            </div>
+
+            <button class="mobile-nav-btn mobile-nav-right" (click)="nextImage()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
