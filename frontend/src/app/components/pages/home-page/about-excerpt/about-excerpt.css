@@ -47,6 +47,7 @@
 }
 
 .learn-more-btn {
+  display: inline-block;
   padding: 0.75rem 2rem;
   background-color: #c19852;
   color: white;
@@ -56,6 +57,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .learn-more-btn:hover {

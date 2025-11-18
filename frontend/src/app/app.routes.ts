@@ -5,7 +5,7 @@ import {DentistryPage} from './components/pages/dentistry-page/dentistry-page';
 import {GalleryPage} from './components/pages/gallery-page/gallery-page';
 import {PricingPage} from './components/pages/pricing-page/pricing-page';
 import {ServiceDetailPage} from './components/pages/service-detail-page/service-detail-page';
-import {EmployeeDetailPage} from './components/pages/employee-detail-page/employee-detail-page';
+import {AboutUsPage} from './components/pages/about-us-page/about-us-page';
 
 export const routes: Routes = [
   {
@@ -37,12 +37,12 @@ export const routes: Routes = [
     component: PricingPage
   },
   {
-    path: 'services/:category/:serviceSlug',
-    component: ServiceDetailPage
+    path: 'about-us',
+    component: AboutUsPage
   },
   {
-    path: 'employee/:employeeSlug',
-    component: EmployeeDetailPage
+    path: 'services/:category/:serviceSlug',
+    component: ServiceDetailPage
   }
 ];
 
