@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-content-blocks',
@@ -9,43 +10,49 @@ import { CommonModule } from '@angular/common';
   styleUrl: './content-blocks.css'
 })
 export class ContentBlocksComponent {
-  // Placeholder doctor data
-  doctors = [
-    { name: 'Dr. John Smith', specialty: 'General Dentist' },
-    { name: 'Dr. Sarah Johnson', specialty: 'Orthodontist' },
-    { name: 'Dr. Michael Brown', specialty: 'Periodontist' },
-    { name: 'Dr. Emily Davis', specialty: 'Endodontist' },
-    { name: 'Dr. Robert Wilson', specialty: 'Oral Surgeon' }
+  private router = inject(Router);
+
+  // Placeholder gallery images
+  galleryImages = [
+    { id: 1 },
+    { id: 2 },
+    { id: 3 },
+    { id: 4 },
+    { id: 5 }
   ];
 
   // Create an infinite loop by tripling the array
-  infiniteDoctors = [...this.doctors, ...this.doctors, ...this.doctors];
-  currentDoctorIndex = this.doctors.length; // Start at the middle copy
+  infiniteGalleryImages = [...this.galleryImages, ...this.galleryImages, ...this.galleryImages];
+  currentImageIndex = this.galleryImages.length; // Start at the middle copy
   isTransitioning = true;
 
   getTransform(): string {
-    const offset = this.currentDoctorIndex * 100;
+    const offset = this.currentImageIndex * 100;
     return `translateX(-${offset}%)`;
   }
 
   isActive(index: number): boolean {
-    return index === this.currentDoctorIndex;
+    return index === this.currentImageIndex;
   }
 
-  nextDoctor() {
+  nextImage() {
     this.isTransitioning = true;
-    this.currentDoctorIndex++;
+    this.currentImageIndex++;
 
     // If we've reached the end of the second copy, reset to the start of the middle copy
-    if (this.currentDoctorIndex >= this.doctors.length * 2) {
+    if (this.currentImageIndex >= this.galleryImages.length * 2) {
       setTimeout(() => {
         this.isTransitioning = false;
-        this.currentDoctorIndex = this.doctors.length;
+        this.currentImageIndex = this.galleryImages.length;
         // Force reflow
         setTimeout(() => {
           this.isTransitioning = true;
         }, 50);
       }, 500); // Match the CSS transition duration
     }
+  }
+
+  navigateToGallery() {
+    this.router.navigate(['/gallery']);
   }
 }
