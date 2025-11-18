@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -9,8 +9,10 @@ import { Router } from '@angular/router';
   templateUrl: './content-blocks.html',
   styleUrl: './content-blocks.css'
 })
-export class ContentBlocksComponent {
+export class ContentBlocksComponent implements AfterViewInit {
   private router = inject(Router);
+
+  @ViewChildren('contentSection') contentSections!: QueryList<ElementRef<HTMLElement>>;
 
   // Placeholder gallery images
   galleryImages = [
@@ -25,6 +27,59 @@ export class ContentBlocksComponent {
   infiniteGalleryImages = [...this.galleryImages, ...this.galleryImages, ...this.galleryImages];
   currentImageIndex = this.galleryImages.length; // Start at the middle copy
   isTransitioning = true;
+
+  ngAfterViewInit(): void {
+    this.setupScrollAnimations();
+  }
+
+  private setupScrollAnimations(): void {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          const section = entry.target as HTMLElement;
+          this.triggerSectionAnimation(section);
+        }
+      });
+    }, options);
+
+    this.contentSections.forEach(section => {
+      observer.observe(section.nativeElement);
+    });
+  }
+
+  private triggerSectionAnimation(section: HTMLElement): void {
+    const halves = section.querySelectorAll('.section-half');
+
+    halves.forEach((half, index) => {
+      const element = half as HTMLElement;
+
+      if (index === 0) {
+        // Left half - slides from left
+        element.animate(
+          [
+            { offset: 0, transform: 'translateX(-100%)' },
+            { offset: 1, transform: 'translateX(0)' }
+          ],
+          { duration: 1500, fill: 'forwards', easing: 'ease-out' }
+        );
+      } else {
+        // Right half - slides from right
+        element.animate(
+          [
+            { offset: 0, transform: 'translateX(100%)' },
+            { offset: 1, transform: 'translateX(0)' }
+          ],
+          { duration: 1500, fill: 'forwards', easing: 'ease-out' }
+        );
+      }
+    });
+  }
 
   getTransform(): string {
     const offset = this.currentImageIndex * 100;

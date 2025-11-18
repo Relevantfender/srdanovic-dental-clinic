@@ -26,6 +26,15 @@
   padding: 4rem;
 }
 
+/* Initial animation states */
+.left-half {
+  transform: translateX(-100%);
+}
+
+.right-half {
+  transform: translateX(100%);
+}
+
 /* Video Section */
 .video-section {
   background-color: transparent;
