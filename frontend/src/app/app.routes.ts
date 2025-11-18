@@ -6,6 +6,7 @@ import {GalleryPage} from './components/pages/gallery-page/gallery-page';
 import {PricingPage} from './components/pages/pricing-page/pricing-page';
 import {ServiceDetailPage} from './components/pages/service-detail-page/service-detail-page';
 import {AboutUsPage} from './components/pages/about-us-page/about-us-page';
+import {ContactUsPage} from './components/pages/contact-us-page/contact-us-page';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,10 @@ export const routes: Routes = [
   {
     path: 'about-us',
     component: AboutUsPage
+  },
+  {
+    path: 'contact-us',
+    component: ContactUsPage
   },
   {
     path: 'services/:category/:serviceSlug',

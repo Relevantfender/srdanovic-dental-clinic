@@ -91,6 +91,10 @@ export class HeaderComponent {
     {
       label: 'Pricing',
       route: '/pricing'
+    },
+    {
+      label: 'Contact Us',
+      route: '/contact-us'
     }
   ];
 
