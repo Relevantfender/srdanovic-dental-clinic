@@ -29,6 +29,8 @@ export class ServicesComponent implements AfterViewInit {
       entries.forEach(entry => {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
           this.triggerAnimations();
+        } else if (!entry.isIntersecting) {
+          this.reverseAnimations();
         }
       });
     }, options);
@@ -68,6 +70,38 @@ export class ServicesComponent implements AfterViewInit {
         { offset: 1, transform: 'translateX(0)' }
       ],
       { duration: 1500, fill: 'forwards', easing: 'ease-out', delay: 200 }
+    );
+  }
+
+  private reverseAnimations(): void {
+    // Title text animation - fades out
+    const titleElement = this.servicesTitle.nativeElement;
+    titleElement.animate(
+      [
+        { offset: 0, opacity: 1 },
+        { offset: 1, opacity: 0 }
+      ],
+      { duration: 900, fill: 'forwards', easing: 'ease-in' }
+    );
+
+    // Left service - slides back to left
+    const leftElement = this.leftService.nativeElement;
+    leftElement.animate(
+      [
+        { offset: 0, transform: 'translateX(0)' },
+        { offset: 1, transform: 'translateX(-100%)' }
+      ],
+      { duration: 1500, fill: 'forwards', easing: 'ease-in' }
+    );
+
+    // Right service - slides back to right
+    const rightElement = this.rightService.nativeElement;
+    rightElement.animate(
+      [
+        { offset: 0, transform: 'translateX(0)' },
+        { offset: 1, transform: 'translateX(100%)' }
+      ],
+      { duration: 1500, fill: 'forwards', easing: 'ease-in' }
     );
   }
 }

@@ -29,6 +29,8 @@ export class AboutExcerptComponent implements AfterViewInit {
       entries.forEach(entry => {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
           this.triggerAnimations();
+        } else if (!entry.isIntersecting) {
+          this.reverseAnimations();
         }
       });
     }, options);
@@ -70,6 +72,38 @@ export class AboutExcerptComponent implements AfterViewInit {
         { offset: 1, transform: 'translateY(-30px)', opacity: 0.8 }
       ],
       { duration: 2000, fill: 'forwards', easing: 'ease-in-out', delay: 200 }
+    );
+  }
+
+  private reverseAnimations(): void {
+    // Text animation - fade out
+    const textElement = this.textContent.nativeElement;
+    textElement.animate(
+      [
+        { offset: 0, opacity: 1, transform: 'translateY(0)' },
+        { offset: 1, opacity: 0, transform: 'translateY(20px)' }
+      ],
+      { duration: 900, fill: 'forwards', easing: 'ease-in' }
+    );
+
+    // Left image (image-large) - reverses back to top
+    const leftElement = this.imageLarge.nativeElement;
+    leftElement.animate(
+      [
+        { offset: 0, transform: 'translateY(30px)', opacity: 0.8 },
+        { offset: 1, transform: 'translateY(-150px)', opacity: 0 }
+      ],
+      { duration: 2000, fill: 'forwards', easing: 'ease-in-out' }
+    );
+
+    // Right image (image-small) - reverses back to bottom
+    const rightElement = this.imageSmall.nativeElement;
+    rightElement.animate(
+      [
+        { offset: 0, transform: 'translateY(-30px)', opacity: 0.8 },
+        { offset: 1, transform: 'translateY(150px)', opacity: 0 }
+      ],
+      { duration: 2000, fill: 'forwards', easing: 'ease-in-out' }
     );
   }
 }

@@ -44,6 +44,8 @@ export class InfoSectionComponent implements AfterViewInit {
       entries.forEach(entry => {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
           this.triggerAnimations();
+        } else if (!entry.isIntersecting) {
+          this.reverseAnimations();
         }
       });
     }, options);
@@ -72,6 +74,28 @@ export class InfoSectionComponent implements AfterViewInit {
         { offset: 1, transform: 'translateX(0)' }
       ],
       { duration: 1500, fill: 'forwards', easing: 'ease-out' }
+    );
+  }
+
+  private reverseAnimations(): void {
+    // Hours block - slides back to left
+    const hoursElement = this.hoursBlock.nativeElement;
+    hoursElement.animate(
+      [
+        { offset: 0, transform: 'translateX(0)' },
+        { offset: 1, transform: 'translateX(-100%)' }
+      ],
+      { duration: 1500, fill: 'forwards', easing: 'ease-in' }
+    );
+
+    // Map block - slides back to right
+    const mapElement = this.mapBlock.nativeElement;
+    mapElement.animate(
+      [
+        { offset: 0, transform: 'translateX(0)' },
+        { offset: 1, transform: 'translateX(100%)' }
+      ],
+      { duration: 1500, fill: 'forwards', easing: 'ease-in' }
     );
   }
 }

@@ -44,6 +44,9 @@ export class ContentBlocksComponent implements AfterViewInit {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
           const section = entry.target as HTMLElement;
           this.triggerSectionAnimation(section);
+        } else if (!entry.isIntersecting) {
+          const section = entry.target as HTMLElement;
+          this.reverseSectionAnimation(section);
         }
       });
     }, options);
@@ -76,6 +79,34 @@ export class ContentBlocksComponent implements AfterViewInit {
             { offset: 1, transform: 'translateX(0)' }
           ],
           { duration: 1500, fill: 'forwards', easing: 'ease-out' }
+        );
+      }
+    });
+  }
+
+  private reverseSectionAnimation(section: HTMLElement): void {
+    const halves = section.querySelectorAll('.section-half');
+
+    halves.forEach((half, index) => {
+      const element = half as HTMLElement;
+
+      if (index === 0) {
+        // Left half - slides back to left
+        element.animate(
+          [
+            { offset: 0, transform: 'translateX(0)' },
+            { offset: 1, transform: 'translateX(-100%)' }
+          ],
+          { duration: 1500, fill: 'forwards', easing: 'ease-in' }
+        );
+      } else {
+        // Right half - slides back to right
+        element.animate(
+          [
+            { offset: 0, transform: 'translateX(0)' },
+            { offset: 1, transform: 'translateX(100%)' }
+          ],
+          { duration: 1500, fill: 'forwards', easing: 'ease-in' }
         );
       }
     });
