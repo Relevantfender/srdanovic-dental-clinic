@@ -167,6 +167,9 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
 }
 
 .expand-btn:hover {

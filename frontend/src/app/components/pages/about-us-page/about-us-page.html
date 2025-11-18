@@ -56,7 +56,7 @@
               <p class="member-description">
                 {{ isExpanded ? currentMember.fullDescription : currentMember.shortDescription }}
               </p>
-              <button class="expand-btn" (click)="toggleDescription()">
+              <button class="expand-btn" (click)="toggleDescription(); $event.stopPropagation()">
                 {{ isExpanded ? 'Show Less' : 'Read More' }}
               </button>
             </div>
