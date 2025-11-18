@@ -9,6 +9,9 @@
       <div class="text-content">
         <h2 class="service-title">{{ selectedService.name }}</h2>
         <p class="service-description">{{ selectedService.description }}</p>
+        <a [routerLink]="selectedService.routerLink" class="view-details-button">
+          View Full Details
+        </a>
       </div>
 
       <img [src]="selectedService.image2"

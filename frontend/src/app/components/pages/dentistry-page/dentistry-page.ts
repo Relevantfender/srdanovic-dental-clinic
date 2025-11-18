@@ -32,7 +32,8 @@ export class DentistryPage {
         name: service.name,
         description: service.description,
         image1: service.image1,
-        image2: service.image2
+        image2: service.image2,
+        routerLink: service.routerLink
       };
     });
   }
