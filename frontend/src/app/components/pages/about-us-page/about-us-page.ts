@@ -25,6 +25,7 @@ export class AboutUsPage implements OnInit {
   currentIndex: number = 0;
   animationCounter: number = 0;
   slideDirection: string = 'translateX(100%)';
+  isExpanded: boolean = false;
 
   employees: Employee[] = getAllEmployees();
 
@@ -48,6 +49,7 @@ export class AboutUsPage implements OnInit {
     this.slideDirection = 'translateX(100%)';
     this.currentIndex = (this.currentIndex + 1) % this.employees.length;
     this.animationCounter++;
+    this.isExpanded = false; // Reset expansion when changing employee
   }
 
   previous(): void {
@@ -56,6 +58,11 @@ export class AboutUsPage implements OnInit {
       ? this.employees.length - 1
       : this.currentIndex - 1;
     this.animationCounter++;
+    this.isExpanded = false; // Reset expansion when changing employee
+  }
+
+  toggleDescription(): void {
+    this.isExpanded = !this.isExpanded;
   }
 
   get currentMember(): Employee {
