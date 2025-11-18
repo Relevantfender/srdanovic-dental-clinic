@@ -396,6 +396,7 @@
 .patient-carousel {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   padding: 1.5rem 0 0;
   margin-top: auto;
@@ -408,6 +409,18 @@
   overflow-x: auto;
   padding: 0.5rem;
   scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  justify-content: center;
+}
+
+/* Hide scrollbar but keep functionality */
+.patient-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.patient-carousel-track {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .patient-carousel-item {
@@ -419,6 +432,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   opacity: 0.5;
+  scroll-snap-align: center;
 }
 
 .patient-carousel-item:hover {

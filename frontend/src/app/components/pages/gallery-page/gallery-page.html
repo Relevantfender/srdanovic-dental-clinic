@@ -123,7 +123,7 @@
             </svg>
           </button>
 
-          <div class="patient-carousel-track">
+          <div class="patient-carousel-track" #carouselTrack>
             @for (patient of patients; track patient.id) {
               <div class="patient-carousel-item"
                    [class.active]="selectedPatient.id === patient.id"

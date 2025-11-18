@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GalleryService, PatientGallery } from '../../../services/gallery.service';
 
@@ -9,8 +9,10 @@ import { GalleryService, PatientGallery } from '../../../services/gallery.servic
   templateUrl: './gallery-page.html',
   styleUrl: './gallery-page.css'
 })
-export class GalleryPage implements OnInit {
+export class GalleryPage implements OnInit, AfterViewInit {
   private galleryService = inject(GalleryService);
+
+  @ViewChild('carouselTrack') carouselTrack!: ElementRef<HTMLDivElement>;
 
   patients: PatientGallery[] = [];
   selectedPatient: PatientGallery | null = null;
@@ -20,9 +22,17 @@ export class GalleryPage implements OnInit {
     this.patients = this.galleryService.getAllPatients();
   }
 
+  ngAfterViewInit() {
+    // Initial centering after view is ready
+    if (this.selectedPatient) {
+      setTimeout(() => this.scrollToActivePatient(), 100);
+    }
+  }
+
   openPatientGallery(patient: PatientGallery) {
     this.selectedPatient = patient;
     this.currentImageIndex = 0;
+    setTimeout(() => this.scrollToActivePatient(), 50);
   }
 
   closeLightbox() {
@@ -66,6 +76,29 @@ export class GalleryPage implements OnInit {
       const currentIndex = this.patients.findIndex(p => p.id === this.selectedPatient!.id);
       const nextIndex = (currentIndex + 1) % this.patients.length;
       this.openPatientGallery(this.patients[nextIndex]);
+    }
+  }
+
+  private scrollToActivePatient() {
+    if (!this.carouselTrack || !this.selectedPatient) return;
+
+    const track = this.carouselTrack.nativeElement;
+    const activeIndex = this.patients.findIndex(p => p.id === this.selectedPatient!.id);
+    const items = track.children;
+
+    if (items[activeIndex]) {
+      const item = items[activeIndex] as HTMLElement;
+      const trackWidth = track.offsetWidth;
+      const itemWidth = item.offsetWidth;
+      const itemLeft = item.offsetLeft;
+
+      // Calculate scroll position to center the item
+      const scrollPosition = itemLeft - (trackWidth / 2) + (itemWidth / 2);
+
+      track.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+      });
     }
   }
 }
