@@ -3,6 +3,7 @@ import {HomePage} from './components/pages/home-page/home-page';
 import {AestheticMedicinePage} from './components/pages/aesthetic-medicine-page/aesthetic-medicine-page';
 import {DentistryPage} from './components/pages/dentistry-page/dentistry-page';
 import {GalleryPage} from './components/pages/gallery-page/gallery-page';
+import {PricingPage} from './components/pages/pricing-page/pricing-page';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,10 @@ export const routes: Routes = [
   {
     path: 'gallery',
     component: GalleryPage
+  },
+  {
+    path: 'pricing',
+    component: PricingPage
   }
 ];
 
