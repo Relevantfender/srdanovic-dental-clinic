@@ -2,8 +2,9 @@
   width: 100%;
   min-height: 500px;
   background-color: white;
-  padding: 60px 20px;
+  padding: 60px 20px 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -92,7 +93,14 @@
   line-height: 1.8;
   color: #333;
   font-weight: 400;
-  margin-bottom: 30px;
+}
+
+/* Button Container - Outside the framed div */
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px 40px;
 }
 
 .view-details-button {
