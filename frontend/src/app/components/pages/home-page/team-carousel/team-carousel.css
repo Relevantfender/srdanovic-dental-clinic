@@ -14,11 +14,11 @@
 }
 
 .carousel-card {
-  background-color: #000000;
-  border: 3px inset #D4AF37;
+  background-color: #ffffff;
+  border: 3px solid #D4AF37;
   border-radius: 20px;
   padding: 40px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   overflow: hidden;
@@ -36,7 +36,7 @@
 
 .left-content {
   flex: 1;
-  color: #ffffff;
+  color: #333;
 }
 
 .member-name {
@@ -49,17 +49,15 @@
 .member-title {
   font-size: 1.3rem;
   font-weight: 500;
-  color: #ffffff;
+  color: #666;
   margin: 0 0 20px 0;
-  opacity: 0.9;
 }
 
 .member-description {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #ffffff;
+  color: #333;
   margin: 0;
-  opacity: 0.85;
 }
 
 .right-content {
@@ -72,6 +70,43 @@
   object-fit: cover;
   border-radius: 10px;
   border: 2px solid #D4AF37;
+}
+
+/* Learn More Button */
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 30px;
+}
+
+.learn-more-button {
+  display: inline-block;
+  padding: 15px 40px;
+  background: linear-gradient(135deg, #D4AF37 0%, #b8941f 100%);
+  color: white;
+  text-decoration: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 0;
+  border: 2px solid #D4AF37;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+}
+
+.learn-more-button:hover {
+  background: linear-gradient(135deg, #b8941f 0%, #D4AF37 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(212, 175, 55, 0.5);
+  border-color: #b8941f;
+}
+
+.learn-more-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(212, 175, 55, 0.3);
 }
 
 .carousel-navigation {
