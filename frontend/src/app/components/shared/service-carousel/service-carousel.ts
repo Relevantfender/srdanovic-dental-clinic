@@ -13,7 +13,7 @@ export interface ServiceItem {
   templateUrl: './service-carousel.html',
   styleUrls: ['./service-carousel.css'],
   standalone: true,
-  imports: [CommonModule, RouterModule]
+  imports: [CommonModule, RouterModule],
 })
 export class ServiceCarouselComponent {
   @Input() services: ServiceItem[] = [];
@@ -25,7 +25,7 @@ export class ServiceCarouselComponent {
   viewportWidth = signal(typeof window !== 'undefined' ? window.innerWidth : 1200);
 
   @HostListener('window:resize', ['$event'])
-  onResize() {
+  onResize(window: any) {
     this.viewportWidth.set(window.innerWidth);
   }
 
@@ -44,10 +44,10 @@ export class ServiceCarouselComponent {
     // This allows for smooth infinite scrolling
     if (this.services.length <= itemsPerView) {
       // Not enough items to fill the view, duplicate once for smooth cycling
-      return [...this.services, ...this.services];
+      return [...this.services];
     } else {
       // Enough items, just add one extra set for smooth infinite scroll
-      return [...this.services, ...this.services];
+      return [...this.services];
     }
   }
 
@@ -62,7 +62,7 @@ export class ServiceCarouselComponent {
     if (this.isAnimating()) return;
 
     this.isAnimating.set(true);
-    this.currentIndex.update(val => val + 1);
+    this.currentIndex.update((val) => val + 1);
 
     setTimeout(() => {
       this.isAnimating.set(false);
@@ -83,10 +83,10 @@ export class ServiceCarouselComponent {
     if (this.currentIndex() === 0) {
       this.currentIndex.set(this.services.length);
       setTimeout(() => {
-        this.currentIndex.update(val => val - 1);
+        this.currentIndex.update((val) => val - 1);
       }, 50);
     } else {
-      this.currentIndex.update(val => val - 1);
+      this.currentIndex.update((val) => val - 1);
     }
 
     setTimeout(() => {
