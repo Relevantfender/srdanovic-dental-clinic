@@ -1,26 +1,36 @@
 <div class="employee-detail-page">
-  @if (employee) {
-    <div class="detail-view-container">
-      <div class="detail-content">
-        <div class="employee-header">
-          <img [src]="employee.image" [alt]="employee.name" class="employee-image">
-          <div class="employee-info">
-            <h1 class="employee-name">{{ employee.name }}</h1>
-            <h2 class="employee-title">{{ employee.title }}</h2>
+  <!-- Employee Selector -->
+  <app-employee-selector
+    [employees]="allEmployees"
+    [currentEmployeeSlug]="employeeSlug"
+    (employeeSelected)="onEmployeeSelected($event)">
+  </app-employee-selector>
+
+  <!-- Employee Detail Content -->
+  <div #employeeContent>
+    @if (employee) {
+      <div class="detail-view-container">
+        <div class="detail-content">
+          <div class="employee-header">
+            <img [src]="employee.image" [alt]="employee.name" class="employee-image">
+            <div class="employee-info">
+              <h1 class="employee-name">{{ employee.name }}</h1>
+              <h2 class="employee-title">{{ employee.title }}</h2>
+            </div>
+          </div>
+
+          <div class="employee-description">
+            <p>{{ employee.fullDescription }}</p>
           </div>
         </div>
-
-        <div class="employee-description">
-          <p>{{ employee.fullDescription }}</p>
+      </div>
+    } @else {
+      <div class="error-container">
+        <div class="error-content">
+          <h2>Employee Not Found</h2>
+          <p>The employee you're looking for doesn't exist.</p>
         </div>
       </div>
-    </div>
-  } @else {
-    <div class="error-container">
-      <div class="error-content">
-        <h2>Employee Not Found</h2>
-        <p>The employee you're looking for doesn't exist.</p>
-      </div>
-    </div>
-  }
+    }
+  </div>
 </div>
