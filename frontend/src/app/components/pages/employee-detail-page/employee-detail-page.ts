@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Employee } from '../../../models/employee.model';
 import { getEmployeeBySlug, getAllEmployees } from '../../../data/employees.data';
-import { EmployeeSelectorComponent } from '../../shared/employee-selector/employee-selector';
+import { ServiceCarouselComponent, ServiceItem } from '../../shared/service-carousel/service-carousel';
 
 @Component({
   selector: 'app-employee-detail-page',
   standalone: true,
-  imports: [CommonModule, EmployeeSelectorComponent],
+  imports: [CommonModule, ServiceCarouselComponent],
   templateUrl: './employee-detail-page.html',
   styleUrl: './employee-detail-page.css'
 })
@@ -17,7 +17,13 @@ export class EmployeeDetailPage implements OnInit {
 
   employee: Employee | undefined;
   employeeSlug: string = '';
-  allEmployees: Employee[] = getAllEmployees();
+
+  // Convert employees to ServiceItem format for carousel
+  employeeItems: ServiceItem[] = getAllEmployees().map(emp => ({
+    name: emp.name,
+    image: emp.image,
+    routerLink: emp.routerLink
+  }));
 
   constructor(private route: ActivatedRoute) {}
 
@@ -28,7 +34,7 @@ export class EmployeeDetailPage implements OnInit {
     });
   }
 
-  onEmployeeSelected(employee: Employee): void {
+  onEmployeeSelected(item: ServiceItem): void {
     // Scroll to content after route change
     setTimeout(() => {
       if (this.employeeContent) {

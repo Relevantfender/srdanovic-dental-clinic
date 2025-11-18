@@ -1,10 +1,10 @@
 <div class="employee-detail-page">
-  <!-- Employee Selector -->
-  <app-employee-selector
-    [employees]="allEmployees"
-    [currentEmployeeSlug]="employeeSlug"
-    (employeeSelected)="onEmployeeSelected($event)">
-  </app-employee-selector>
+  <!-- Employee Carousel -->
+  <app-service-carousel
+    [services]="employeeItems"
+    [title]="'Our Team'"
+    (serviceSelected)="onEmployeeSelected($event)">
+  </app-service-carousel>
 
   <!-- Employee Detail Content -->
   <div #employeeContent>
