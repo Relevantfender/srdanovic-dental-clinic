@@ -1,0 +1,204 @@
+.employee-detail-page {
+  min-height: 100vh;
+  background-color: white;
+  padding-top: 10rem; /* Account for fixed header height */
+}
+
+.detail-view-container {
+  width: 100%;
+  min-height: 500px;
+  background-color: white;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-content {
+  position: relative;
+  background: white;
+  min-width: 600px;
+  min-height: 400px;
+  max-width: 1000px;
+  width: 90%;
+  padding: 80px 60px;
+  border: none;
+}
+
+/* Upper right corner border */
+.detail-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  border-top: 2px solid #D4AF37;
+  border-right: 2px solid #D4AF37;
+}
+
+/* Lower left corner border */
+.detail-content::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  border-bottom: 2px solid #D4AF37;
+  border-left: 2px solid #D4AF37;
+}
+
+.employee-header {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 40px;
+  z-index: 1;
+  position: relative;
+}
+
+.employee-image {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border: 2px solid #D4AF37;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
+
+.employee-info {
+  flex: 1;
+}
+
+.employee-name {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #D4AF37;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+.employee-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #666;
+  margin: 0;
+}
+
+.employee-description {
+  z-index: 1;
+  position: relative;
+}
+
+.employee-description p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: #333;
+  font-weight: 400;
+}
+
+/* Error State */
+.error-container {
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+.error-content {
+  text-align: center;
+  color: #333;
+}
+
+.error-content h2 {
+  font-size: 2.5rem;
+  color: #D4AF37;
+  margin-bottom: 20px;
+}
+
+.error-content p {
+  font-size: 1.25rem;
+  color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .employee-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .employee-name {
+    font-size: 2.5rem;
+  }
+
+  .employee-title {
+    font-size: 1.3rem;
+  }
+
+  .employee-description p {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .detail-content {
+    min-width: unset;
+    width: 95%;
+    min-height: 350px;
+    padding: 40px 30px;
+  }
+
+  .employee-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .employee-image {
+    width: 180px;
+    height: 180px;
+  }
+
+  .employee-name {
+    font-size: 2rem;
+  }
+
+  .employee-title {
+    font-size: 1.2rem;
+  }
+
+  .employee-description p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-content {
+    padding: 30px 20px;
+    min-height: 300px;
+  }
+
+  .employee-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .employee-name {
+    font-size: 1.5rem;
+  }
+
+  .employee-title {
+    font-size: 1.1rem;
+  }
+
+  .employee-description p {
+    font-size: 0.95rem;
+  }
+}

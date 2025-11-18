@@ -1,0 +1,84 @@
+<div class="about-us-page">
+  <!-- About Us Section -->
+  <section class="about-section">
+    <div class="container">
+      <div class="content-wrapper">
+        <!-- Left Side - About Text -->
+        <div class="text-content">
+          <h1 class="section-title">About Us</h1>
+          <p class="about-text">
+            At Srdanović Dental Clinic, we are deeply committed to transforming lives through exceptional dental care.
+            Our experienced team combines dedication, expertise, and compassion to provide personalized treatment for every patient.
+            We pride ourselves on delivering care that adheres to the highest professional standards—lege artis—utilizing the
+            latest advancements in dental science and technology. Your healthy, confident smile is our ultimate goal.
+          </p>
+          <p class="about-text">
+            With years of experience and a passion for excellence, we offer a comprehensive range of dental services,
+            from routine checkups to advanced cosmetic procedures. Our state-of-the-art facility is designed with your
+            comfort in mind, ensuring that every visit is a pleasant experience.
+          </p>
+          <p class="about-text">
+            We believe in building lasting relationships with our patients, founded on trust, transparency, and exceptional care.
+            Your oral health journey is unique, and we're here to support you every step of the way.
+          </p>
+        </div>
+
+        <!-- Right Side - Images -->
+        <div class="images-content">
+          <div class="image-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1661701422675-3b07ceaaef31?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Happy family smiling"
+              class="image-large"
+            >
+            <img
+              src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=400&h=500&fit=crop"
+              alt="Beautiful smile close-up"
+              class="image-small"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Team Section -->
+  <section id="employees" class="employees-section">
+    <div class="container">
+      <h2 class="carousel-title">Meet Our Team</h2>
+
+      <div class="team-carousel-container">
+        <div class="carousel-card" [@carouselSlide]="{value: animationCounter, params: {slideFrom: slideDirection}}">
+          <div class="card-content">
+            <div class="left-content">
+              <h3 class="member-name">{{ currentMember.name }}</h3>
+              <h4 class="member-title">{{ currentMember.title }}</h4>
+              <p class="member-description">
+                {{ isExpanded ? currentMember.fullDescription : currentMember.shortDescription }}
+              </p>
+              <button class="expand-btn" (click)="toggleDescription(); $event.stopPropagation()">
+                {{ isExpanded ? 'Show Less' : 'Read More' }}
+              </button>
+            </div>
+            <div class="right-content">
+              <img [src]="currentMember.image" [alt]="currentMember.name" class="member-image">
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-navigation">
+          <button class="nav-button" (click)="previous()" aria-label="Previous team member">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="nav-button" (click)="next()" aria-label="Next team member">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

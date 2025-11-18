@@ -1,0 +1,36 @@
+<div class="team-carousel-container">
+  <h2 class="carousel-title">Meet our team</h2>
+
+  <div class="carousel-card" [@carouselSlide]="{value: animationCounter, params: {slideFrom: slideDirection}}">
+    <div class="card-content">
+      <div class="left-content">
+        <h3 class="member-name">{{ currentMember.name }}</h3>
+        <h4 class="member-title">{{ currentMember.title }}</h4>
+        <p class="member-description">{{ currentMember.shortDescription }}</p>
+      </div>
+      <div class="right-content">
+        <img [src]="currentMember.image" [alt]="currentMember.name" class="member-image">
+      </div>
+    </div>
+  </div>
+
+  <!-- Learn More Button -->
+  <div class="button-container">
+    <a routerLink="/about-us" fragment="employees" class="learn-more-button">
+      Learn More
+    </a>
+  </div>
+
+  <div class="carousel-navigation">
+    <button class="nav-button" (click)="previous()" aria-label="Previous team member">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="nav-button" (click)="next()" aria-label="Next team member">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+</div>

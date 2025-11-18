@@ -1,0 +1,75 @@
+<section class="content-blocks">
+  <!-- Section 1: Video and Services -->
+  <div class="content-section">
+    <div class="section-half video-section">
+      <div class="video-placeholder">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <p>Video Placeholder</p>
+      </div>
+    </div>
+    <div class="section-half text-section">
+      <div class="text-content">
+        <h2>Excellence in Dental Care</h2>
+        <p>
+          At Srdanovic Dental Clinic, we pride ourselves on delivering exceptional dental services
+          with a personal touch. Our state-of-the-art facility is equipped with the latest technology
+          to ensure your comfort and the best possible outcomes.
+        </p>
+        <p>
+          From routine checkups to advanced cosmetic procedures, we offer comprehensive dental care
+          tailored to your unique needs. Our commitment to excellence means you receive the highest
+          quality treatment in a warm, welcoming environment.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Gallery Showcase -->
+  <div class="content-section">
+    <div class="section-half text-section">
+      <div class="text-content">
+        <h2>Our Results Speak for Themselves</h2>
+        <p>
+          A picture is worth a thousand words. Browse through our gallery to see the transformative
+          results we've achieved for our patients. From smile makeovers to complex restorations,
+          our work demonstrates our commitment to excellence and artistry in dental care.
+        </p>
+        <p>
+          Each smile tells a unique story of renewed confidence and improved oral health.
+          See the quality and attention to detail that sets our practice apart.
+        </p>
+        <button class="gallery-btn" (click)="navigateToGallery()">
+          View Full Gallery
+        </button>
+      </div>
+    </div>
+    <div class="section-half carousel-section">
+      <div class="carousel-wrapper">
+        <div class="gallery-carousel">
+          <div class="carousel-container">
+            <div class="carousel-track"
+                 [style.transform]="getTransform()"
+                 [style.transition]="isTransitioning ? 'transform 0.5s ease-in-out' : 'none'">
+              @for (image of infiniteGalleryImages; track $index; let i = $index) {
+                <div class="gallery-card" [class.active]="isActive(i)">
+                  <div class="gallery-image-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                    </svg>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+        <button class="carousel-btn" (click)="nextImage()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

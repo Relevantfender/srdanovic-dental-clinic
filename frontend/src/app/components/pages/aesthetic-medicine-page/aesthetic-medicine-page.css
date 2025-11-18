@@ -1,0 +1,88 @@
+.aesthetic-medicine-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15rem 20px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.page-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #D4AF37;
+  margin-bottom: 20px;
+}
+
+.page-subtitle {
+  font-size: 1.3rem;
+  color: #555555;
+  margin: 0;
+}
+
+.content-section {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.intro-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333333;
+  margin-bottom: 40px;
+}
+
+.services-list h2 {
+  font-size: 2rem;
+  color: #D4AF37;
+  margin-bottom: 20px;
+}
+
+.services-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.services-list li {
+  font-size: 1.2rem;
+  color: #333333;
+  padding: 15px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.services-list li:last-child {
+  border-bottom: none;
+}
+
+.services-list li::before {
+  content: "✓ ";
+  color: #D4AF37;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .page-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .content-section {
+    padding: 20px;
+  }
+
+  .intro-text {
+    font-size: 1rem;
+  }
+
+  .services-list li {
+    font-size: 1rem;
+  }
+}

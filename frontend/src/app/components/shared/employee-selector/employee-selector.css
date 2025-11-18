@@ -1,0 +1,192 @@
+.employee-selector-container {
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+  border-bottom: 2px solid #D4AF37;
+}
+
+.selector-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #D4AF37;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.employee-grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px 0;
+  scroll-behavior: smooth;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.employee-card {
+  flex: 0 0 250px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employee-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+  border-color: #D4AF37;
+}
+
+.employee-card.active {
+  border: 3px solid #D4AF37;
+  background: linear-gradient(135deg, #fff8e7 0%, #ffffff 100%);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+.employee-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 3px solid #D4AF37;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.employee-card:hover .employee-image {
+  transform: scale(1.1);
+}
+
+.employee-card.active .employee-image {
+  border-width: 4px;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+.employee-info {
+  width: 100%;
+}
+
+.employee-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 5px 0;
+}
+
+.employee-card.active .employee-name {
+  color: #D4AF37;
+}
+
+.employee-title {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.employee-card.active .employee-title {
+  color: #b8941f;
+  font-weight: 500;
+}
+
+/* Custom scrollbar for horizontal scroll */
+.employee-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.employee-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.employee-grid::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+
+.employee-grid::-webkit-scrollbar-thumb:hover {
+  background: #b8941f;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .employee-card {
+    flex: 0 0 220px;
+  }
+
+  .employee-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .selector-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .employee-selector-container {
+    padding: 30px 15px;
+  }
+
+  .employee-grid {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    padding: 15px 0;
+  }
+
+  .employee-card {
+    flex: 0 0 180px;
+  }
+
+  .employee-image {
+    width: 90px;
+    height: 90px;
+  }
+
+  .employee-name {
+    font-size: 1.1rem;
+  }
+
+  .employee-title {
+    font-size: 0.85rem;
+  }
+
+  .selector-title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .employee-card {
+    flex: 0 0 150px;
+    padding: 15px;
+  }
+
+  .employee-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .employee-name {
+    font-size: 1rem;
+  }
+
+  .employee-title {
+    font-size: 0.8rem;
+  }
+
+  .selector-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+}

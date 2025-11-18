@@ -1,0 +1,18 @@
+<div class="employee-selector-container">
+  <h2 class="selector-title">Our Team</h2>
+  <div class="employee-grid">
+    @for (employee of employees; track employee.id) {
+      <a
+        [routerLink]="employee.routerLink"
+        class="employee-card"
+        [class.active]="isCurrentEmployee(employee)"
+        (click)="onEmployeeClick(employee)">
+        <img [src]="employee.image" [alt]="employee.name" class="employee-image">
+        <div class="employee-info">
+          <h3 class="employee-name">{{ employee.name }}</h3>
+          <p class="employee-title">{{ employee.title }}</p>
+        </div>
+      </a>
+    }
+  </div>
+</div>

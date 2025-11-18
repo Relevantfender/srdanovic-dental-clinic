@@ -1,0 +1,145 @@
+<div class="gallery-page">
+  <div class="gallery-container">
+    <div class="page-header">
+      <h1 class="page-title">Our Gallery</h1>
+      <p class="page-subtitle">Explore the transformative results we've achieved for our patients</p>
+    </div>
+
+    <div class="content-section">
+      <p class="intro-text">
+        A picture is worth a thousand words. Browse through our gallery to see the transformative
+        results we've achieved for our patients. From smile makeovers to complex restorations,
+        our work demonstrates our commitment to excellence and artistry in dental care.
+      </p>
+      <p class="intro-text">
+        Each smile tells a unique story of renewed confidence and improved oral health.
+        See the quality and attention to detail that sets our practice apart.
+      </p>
+    </div>
+  </div>
+
+  <!-- Gallery Grid Section -->
+  <div class="gallery-grid-section">
+    <div class="gallery-grid">
+      @for (patient of patients; track patient.id) {
+        <div class="gallery-item" (click)="openPatientGallery(patient)">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img [src]="patient.thumbnailImage" [alt]="patient.patientName" />
+              </div>
+              <div class="flip-card-back">
+                <img [src]="patient.smileImage" [alt]="patient.patientName + ' smile'" />
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (selectedPatient) {
+    <div class="lightbox" (click)="closeLightbox()">
+      <div class="lightbox-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeLightbox()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Desktop Layout -->
+        <div class="lightbox-desktop">
+          <!-- Navigation Arrow Left -->
+          <button class="nav-arrow nav-arrow-left" (click)="previousImage()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Main Image -->
+          <div class="lightbox-main-image">
+            <img [src]="currentImage?.url" [alt]="currentImage?.alt" />
+          </div>
+
+          <!-- Navigation Arrow Right -->
+          <button class="nav-arrow nav-arrow-right" (click)="nextImage()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Thumbnail Strip -->
+          <div class="thumbnail-strip">
+            @for (image of selectedPatient.detailImages; track $index) {
+              <div class="thumbnail-item"
+                   [class.active]="currentImageIndex === $index"
+                   (click)="selectImage($index)">
+                <img [src]="image.url" [alt]="image.alt" />
+              </div>
+            }
+          </div>
+        </div>
+
+
+        <!-- Mobile Layout -->
+        <div class="lightbox-mobile">
+          <!-- Thumbnails on Top -->
+          <div class="mobile-thumbnails">
+            @for (image of selectedPatient.detailImages; track $index) {
+              <div class="mobile-thumbnail"
+                   [class.active]="currentImageIndex === $index"
+                   (click)="selectImage($index)">
+                <img [src]="image.url" [alt]="image.alt" />
+              </div>
+            }
+          </div>
+
+          <!-- Main Carousel Below -->
+          <div class="mobile-carousel">
+            <button class="mobile-nav-btn mobile-nav-left" (click)="previousImage()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+
+            <div class="mobile-main-image">
+              <img [src]="currentImage?.url" [alt]="currentImage?.alt" />
+            </div>
+
+            <button class="mobile-nav-btn mobile-nav-right" (click)="nextImage()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Patient Carousel (Navigation between patients) -->
+        <div class="patient-carousel">
+          <button class="patient-nav-btn patient-nav-left" (click)="previousPatient()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <div class="patient-carousel-track" #carouselTrack>
+            @for (patient of patients; track patient.id) {
+              <div class="patient-carousel-item"
+                   [class.active]="selectedPatient.id === patient.id"
+                   (click)="openPatientGallery(patient)">
+                <img [src]="patient.thumbnailImage" [alt]="patient.patientName" />
+              </div>
+            }
+          </div>
+
+          <button class="patient-nav-btn patient-nav-right" (click)="nextPatient()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
