@@ -20,6 +20,11 @@ export class PricingPage implements OnInit {
   selectedCategoryId: string | null = null;
   expandedSpecializations: Set<number> = new Set();
 
+  // Quantity dialog state
+  showQuantityDialog = false;
+  editingCartItem: CartItem | null = null;
+  tempQuantity = 1;
+
   ngOnInit() {
     this.categories = this.pricingService.getCategories();
   }
@@ -66,7 +71,8 @@ export class PricingPage implements OnInit {
     const existingItem = this.cart.find(cartItem => cartItem.item.id === item.id);
 
     if (existingItem) {
-      existingItem.quantity++;
+      // Deselect if already in cart
+      this.removeFromCart(existingItem);
     } else {
       this.cart.push({
         item: item,
@@ -96,5 +102,64 @@ export class PricingPage implements OnInit {
 
   getTotalItems(): number {
     return this.cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
+  }
+
+  // Quantity dialog methods
+  openQuantityDialog(cartItem: CartItem, event: Event) {
+    event.stopPropagation();
+    this.editingCartItem = cartItem;
+    this.tempQuantity = cartItem.quantity;
+    this.showQuantityDialog = true;
+  }
+
+  closeQuantityDialog() {
+    this.showQuantityDialog = false;
+    this.editingCartItem = null;
+  }
+
+  incrementQuantity() {
+    if (this.tempQuantity < 32) {
+      this.tempQuantity++;
+    }
+  }
+
+  decrementQuantity() {
+    if (this.tempQuantity > 0) {
+      this.tempQuantity--;
+    }
+  }
+
+  onQuantityInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    let value = input.value;
+
+    // Remove any non-digit characters (including 'e', 'E', '+', '-', '.')
+    value = value.replace(/[^0-9]/g, '');
+
+    // Parse as integer
+    let numValue = parseInt(value, 10);
+
+    // Handle empty input or invalid number
+    if (isNaN(numValue)) {
+      numValue = 0;
+    }
+
+    // Clamp between 0 and 32
+    numValue = Math.max(0, Math.min(32, numValue));
+
+    this.tempQuantity = numValue;
+    input.value = numValue.toString();
+  }
+
+  saveQuantity() {
+    if (this.editingCartItem) {
+      if (this.tempQuantity === 0) {
+        // Remove item if quantity is 0
+        this.removeFromCart(this.editingCartItem);
+      } else {
+        this.editingCartItem.quantity = this.tempQuantity;
+      }
+    }
+    this.closeQuantityDialog();
   }
 }

@@ -87,6 +87,10 @@ export class HeaderComponent {
           ]
         }
       ]
+    },
+    {
+      label: 'Pricing',
+      route: '/pricing'
     }
   ];
 

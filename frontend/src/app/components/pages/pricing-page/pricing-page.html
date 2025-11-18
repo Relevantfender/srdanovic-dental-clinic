@@ -98,12 +98,7 @@
       <div class="calculator-view">
         @if (cart.length === 0) {
           <div class="empty-cart">
-            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="9" cy="21" r="1"></circle>
-              <circle cx="20" cy="21" r="1"></circle>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </svg>
-            <p>Your cart is empty</p>
+            <p>No items selected</p>
             <button class="back-to-services" (click)="toggleCalculator()">
               Hide Calculator
             </button>
@@ -119,7 +114,11 @@
                     <span class="cart-item-category">{{ cartItem.specialization }}</span>
                   </div>
                   <div class="cart-item-right">
-                    <span class="cart-item-quantity">{{ cartItem.quantity }}x</span>
+                    <button
+                      class="cart-item-quantity-btn"
+                      (click)="openQuantityDialog(cartItem, $event)">
+                      {{ cartItem.quantity }}x
+                    </button>
                     <span class="cart-item-price">€{{ cartItem.item.price * cartItem.quantity }}</span>
                     <button
                       class="remove-btn"
@@ -149,4 +148,55 @@
       </div>
     }
   </div>
+
+  <!-- Quantity Editor Dialog -->
+  @if (showQuantityDialog && editingCartItem) {
+    <div class="dialog-overlay" (click)="closeQuantityDialog()">
+      <div class="dialog-content" (click)="$event.stopPropagation()">
+        <h3 class="dialog-title">Edit Quantity</h3>
+        <p class="dialog-item-name">{{ editingCartItem.item.name }}</p>
+
+        <div class="quantity-editor">
+          <button
+            class="quantity-arrow left-arrow"
+            (click)="decrementQuantity()"
+            [disabled]="tempQuantity <= 0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <input
+            type="text"
+            class="quantity-input"
+            [value]="tempQuantity"
+            (input)="onQuantityInput($event)"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            maxlength="2"
+          />
+
+          <button
+            class="quantity-arrow right-arrow"
+            (click)="incrementQuantity()"
+            [disabled]="tempQuantity >= 32">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="quantity-range-label">Range: 0-32</div>
+
+        <div class="dialog-actions">
+          <button class="dialog-btn cancel-btn" (click)="closeQuantityDialog()">
+            Cancel
+          </button>
+          <button class="dialog-btn save-btn" (click)="saveQuantity()">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  }
 </div>
