@@ -113,6 +113,31 @@
             </button>
           </div>
         </div>
+
+        <!-- Patient Carousel (Navigation between patients) -->
+        <div class="patient-carousel">
+          <button class="patient-nav-btn patient-nav-left" (click)="previousPatient()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <div class="patient-carousel-track">
+            @for (patient of patients; track patient.id) {
+              <div class="patient-carousel-item"
+                   [class.active]="selectedPatient?.id === patient.id"
+                   (click)="openPatientGallery(patient)">
+                <img [src]="patient.thumbnailImage" [alt]="patient.patientName" />
+              </div>
+            }
+          </div>
+
+          <button class="patient-nav-btn patient-nav-right" (click)="nextPatient()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   }
