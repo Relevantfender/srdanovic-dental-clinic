@@ -8,100 +8,82 @@
 
     <!-- View Switcher -->
     <div class="view-switcher">
-      <button
-        class="view-btn"
-        [class.active]="currentView === 'services'"
-        (click)="switchView('services')">
-        Services
-      </button>
+      <span class="view-label">Services</span>
       <button
         class="view-btn calculator-btn"
-        [class.active]="currentView === 'calculator'"
-        (click)="switchView('calculator')">
+        [class.active]="showCalculator"
+        (click)="toggleCalculator()">
         Calculator
       </button>
     </div>
 
-    <!-- Services View -->
-    @if (currentView === 'services') {
+    <!-- Category Selector -->
+    <div class="category-selector">
+      <button
+        class="category-btn"
+        [class.active]="isCategorySelected('dentistry')"
+        (click)="selectCategory('dentistry')">
+        Dentistry
+      </button>
+      <button
+        class="category-btn"
+        [class.active]="isCategorySelected('aesthetic')"
+        (click)="selectCategory('aesthetic')">
+        Aesthetic Medicine
+      </button>
+    </div>
+
+    <!-- Services View (Specializations) -->
+    @if (selectedCategoryId) {
       <div class="services-view">
-        @for (category of categories; track category.id) {
-          <div class="category-section">
-            <!-- Category Header -->
+        @for (specialization of getSelectedCategory()?.specializations; track specialization.id) {
+          <div class="specialization-section">
+            <!-- Specialization Header -->
             <button
-              class="category-header"
-              (click)="toggleCategory(category.id)">
-              <h2>{{ category.name }}</h2>
+              class="specialization-header"
+              (click)="toggleSpecialization(specialization.id)">
+              <h3>{{ specialization.name }}</h3>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                [class.rotated]="isCategoryExpanded(category.id)">
+                [class.rotated]="isSpecializationExpanded(specialization.id)">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
 
-            <!-- Specializations -->
-            @if (isCategoryExpanded(category.id)) {
-              <div class="specializations">
-                @for (specialization of category.specializations; track specialization.id) {
-                  <div class="specialization-section">
-                    <!-- Specialization Header -->
-                    <button
-                      class="specialization-header"
-                      (click)="toggleSpecialization(specialization.id)">
-                      <h3>{{ specialization.name }}</h3>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        [class.rotated]="isSpecializationExpanded(specialization.id)">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    </button>
-
-                    <!-- Items -->
-                    @if (isSpecializationExpanded(specialization.id)) {
-                      <div class="items-list">
-                        @for (item of specialization.items; track item.id) {
-                          <div
-                            class="price-item"
-                            (click)="addToCart(item, specialization, category)">
-                            <span class="item-name">{{ item.name }}</span>
-                            <div class="item-right">
-                              <span class="item-price">€{{ item.price }}</span>
-                              @if (isItemInCart(item.id)) {
-                                <svg
-                                  class="checkmark"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="20"
-                                  height="20"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  stroke-width="3"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round">
-                                  <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                              }
-                            </div>
-                          </div>
-                        }
-                      </div>
-                    }
+            <!-- Items -->
+            @if (isSpecializationExpanded(specialization.id)) {
+              <div class="items-list">
+                @for (item of specialization.items; track item.id) {
+                  <div
+                    class="price-item"
+                    (click)="addToCart(item, specialization, getSelectedCategory()!)">
+                    <span class="item-name">{{ item.name }}</span>
+                    <div class="item-right">
+                      <span class="item-price">€{{ item.price }}</span>
+                      @if (isItemInCart(item.id)) {
+                        <svg
+                          class="checkmark"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      }
+                    </div>
                   </div>
                 }
               </div>
@@ -111,8 +93,8 @@
       </div>
     }
 
-    <!-- Calculator/Cart View -->
-    @if (currentView === 'calculator') {
+    <!-- Calculator/Cart View (at bottom) -->
+    @if (showCalculator) {
       <div class="calculator-view">
         @if (cart.length === 0) {
           <div class="empty-cart">
@@ -122,8 +104,8 @@
               <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
             </svg>
             <p>Your cart is empty</p>
-            <button class="back-to-services" (click)="switchView('services')">
-              Browse Services
+            <button class="back-to-services" (click)="toggleCalculator()">
+              Hide Calculator
             </button>
           </div>
         } @else {

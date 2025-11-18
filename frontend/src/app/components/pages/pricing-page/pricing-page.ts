@@ -16,30 +16,25 @@ export class PricingPage implements OnInit {
   cart: CartItem[] = [];
 
   // View state
-  currentView: 'services' | 'calculator' = 'services';
-  expandedCategories: Set<string> = new Set();
+  showCalculator = false;
+  selectedCategoryId: string | null = null;
   expandedSpecializations: Set<number> = new Set();
 
   ngOnInit() {
     this.categories = this.pricingService.getCategories();
   }
 
-  switchView(view: 'services' | 'calculator') {
-    this.currentView = view;
+  toggleCalculator() {
+    this.showCalculator = !this.showCalculator;
   }
 
-  toggleCategory(categoryId: string) {
-    if (this.expandedCategories.has(categoryId)) {
-      this.expandedCategories.delete(categoryId);
-      // Close all specializations in this category
-      const category = this.categories.find(c => c.id === categoryId);
-      if (category) {
-        category.specializations.forEach(spec =>
-          this.expandedSpecializations.delete(spec.id)
-        );
-      }
+  selectCategory(categoryId: string) {
+    if (this.selectedCategoryId === categoryId) {
+      this.selectedCategoryId = null;
+      this.expandedSpecializations.clear();
     } else {
-      this.expandedCategories.add(categoryId);
+      this.selectedCategoryId = categoryId;
+      this.expandedSpecializations.clear();
     }
   }
 
@@ -51,8 +46,12 @@ export class PricingPage implements OnInit {
     }
   }
 
-  isCategoryExpanded(categoryId: string): boolean {
-    return this.expandedCategories.has(categoryId);
+  isCategorySelected(categoryId: string): boolean {
+    return this.selectedCategoryId === categoryId;
+  }
+
+  getSelectedCategory(): Category | undefined {
+    return this.categories.find(c => c.id === this.selectedCategoryId);
   }
 
   isSpecializationExpanded(specId: number): boolean {
