@@ -1,0 +1,34 @@
+<div class="service-detail-page">
+  <!-- Category Navigation Dropdown -->
+  <app-service-navigation-dropdown
+    [currentCategory]="category"
+    [currentServiceSlug]="serviceSlug">
+  </app-service-navigation-dropdown>
+
+  <!-- Service Detail Content -->
+  @if (service) {
+    <div class="detail-view-container">
+      <div class="detail-content">
+        <img [src]="service.image1"
+             [alt]="service.name + ' image 1'"
+             class="corner-image top-left">
+
+        <div class="text-content">
+          <h1 class="service-title">{{ service.name }}</h1>
+          <p class="service-description">{{ service.description }}</p>
+        </div>
+
+        <img [src]="service.image2"
+             [alt]="service.name + ' image 2'"
+             class="corner-image bottom-right">
+      </div>
+    </div>
+  } @else {
+    <div class="error-container">
+      <div class="error-content">
+        <h2>Service Not Found</h2>
+        <p>The service you're looking for doesn't exist.</p>
+      </div>
+    </div>
+  }
+</div>
