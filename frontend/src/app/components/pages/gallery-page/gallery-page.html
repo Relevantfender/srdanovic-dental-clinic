@@ -81,39 +81,6 @@
           </div>
         </div>
 
-        <!-- Bottom Navigation -->
-        <div class="lightbox-bottom-nav">
-          <button class="bottom-nav-btn" (click)="previousImage()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-            Previous
-          </button>
-
-          <div class="image-counter">
-            <span class="current-number">{{ currentImageIndex + 1 }}</span>
-            <span class="separator">/</span>
-            <span class="total-number">{{ selectedPatient.detailImages.length }}</span>
-          </div>
-
-          <div class="dot-indicators">
-            @for (image of selectedPatient.detailImages; track $index) {
-              <button
-                class="dot"
-                [class.active]="currentImageIndex === $index"
-                (click)="selectImage($index)"
-                [attr.aria-label]="'Go to image ' + ($index + 1)">
-              </button>
-            }
-          </div>
-
-          <button class="bottom-nav-btn" (click)="nextImage()">
-            Next
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </button>
-        </div>
 
         <!-- Mobile Layout -->
         <div class="lightbox-mobile">
@@ -159,7 +126,7 @@
           <div class="patient-carousel-track">
             @for (patient of patients; track patient.id) {
               <div class="patient-carousel-item"
-                   [class.active]="selectedPatient?.id === patient.id"
+                   [class.active]="selectedPatient.id === patient.id"
                    (click)="openPatientGallery(patient)">
                 <img [src]="patient.thumbnailImage" [alt]="patient.patientName" />
               </div>
