@@ -6,12 +6,19 @@
       <div class="left-content">
         <h3 class="member-name">{{ currentMember.name }}</h3>
         <h4 class="member-title">{{ currentMember.title }}</h4>
-        <p class="member-description">{{ currentMember.description }}</p>
+        <p class="member-description">{{ currentMember.shortDescription }}</p>
       </div>
       <div class="right-content">
         <img [src]="currentMember.image" [alt]="currentMember.name" class="member-image">
       </div>
     </div>
+  </div>
+
+  <!-- Learn More Button -->
+  <div class="button-container">
+    <a [routerLink]="currentMember.routerLink" class="learn-more-button">
+      Learn More
+    </a>
   </div>
 
   <div class="carousel-navigation">

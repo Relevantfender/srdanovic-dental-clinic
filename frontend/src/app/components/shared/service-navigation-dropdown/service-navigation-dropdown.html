@@ -1,0 +1,56 @@
+<div class="navigation-container">
+  <!-- Category Filter Buttons -->
+  <div class="category-buttons">
+    <button
+      class="category-button"
+      [class.active]="selectedCategory() === 'aesthetic-medicine'"
+      (click)="selectCategory('aesthetic-medicine')">
+      Aesthetic Medicine
+    </button>
+    <button
+      class="category-button"
+      [class.active]="selectedCategory() === 'general-dentistry'"
+      (click)="selectCategory('general-dentistry')">
+      General Dentistry
+    </button>
+  </div>
+
+  <!-- Dropdown Toggle -->
+  <div class="dropdown-container">
+    <button
+      class="dropdown-toggle"
+      (click)="toggleDropdown()">
+      <span class="dropdown-text">{{ getCategoryDisplayName(selectedCategory()) }} Services</span>
+      <svg
+        class="dropdown-arrow"
+        [class.open]="isDropdownOpen()"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M5 7.5L10 12.5L15 7.5"
+          stroke="#FF6B35"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Dropdown Menu -->
+    @if (isDropdownOpen()) {
+      <div class="dropdown-menu">
+        @for (service of services(); track service.id) {
+          <a
+            [routerLink]="service.routerLink"
+            class="dropdown-item"
+            [class.active]="isCurrentService(service)"
+            (click)="closeDropdown()">
+            {{ service.name }}
+          </a>
+        }
+      </div>
+    }
+  </div>
+</div>

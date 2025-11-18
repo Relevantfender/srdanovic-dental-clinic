@@ -31,4 +31,11 @@
 <app-service-carousel
   [services]="dentistryServices"
   [title]="'Explore Our Dental Services'"
+  (serviceSelected)="onServiceSelected($event)"
 ></app-service-carousel>
+
+<!-- Service Detail View Section -->
+<app-service-detail-view
+  #serviceDetailView
+  [selectedService]="selectedServiceDetail"
+></app-service-detail-view>

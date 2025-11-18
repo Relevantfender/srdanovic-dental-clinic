@@ -1,0 +1,31 @@
+<div class="detail-view-container">
+  @if (selectedService) {
+    <!-- Active State: Service Selected -->
+    <div class="detail-content">
+      <img [src]="selectedService.image1"
+           [alt]="selectedService.name + ' image 1'"
+           class="corner-image top-left">
+
+      <div class="text-content">
+        <h2 class="service-title">{{ selectedService.name }}</h2>
+        <p class="service-description">{{ selectedService.description }}</p>
+      </div>
+
+      <img [src]="selectedService.image2"
+           [alt]="selectedService.name + ' image 2'"
+           class="corner-image bottom-right">
+    </div>
+
+    <!-- View Full Details Button - Outside the framed div -->
+    <div class="button-container">
+      <a [routerLink]="selectedService.routerLink" class="view-details-button">
+        View Full Details
+      </a>
+    </div>
+  } @else {
+    <!-- Default State: No Service Selected -->
+    <div class="placeholder-content">
+      <p class="placeholder-text">Click a service above to show details about it</p>
+    </div>
+  }
+</div>

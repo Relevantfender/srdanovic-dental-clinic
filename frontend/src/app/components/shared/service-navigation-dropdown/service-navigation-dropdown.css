@@ -1,0 +1,244 @@
+.navigation-container {
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Category Filter Buttons */
+.category-buttons {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 10px;
+}
+
+.category-button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 1.125rem;
+  font-weight: 500;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.category-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #D4AF37;
+  transition: width 0.3s ease;
+}
+
+.category-button:hover {
+  color: #D4AF37;
+}
+
+.category-button:hover::after {
+  width: 80%;
+}
+
+.category-button.active {
+  color: #D4AF37;
+  font-weight: 700;
+}
+
+.category-button.active::after {
+  width: 100%;
+}
+
+/* Dropdown Container */
+.dropdown-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Dropdown Toggle Button */
+.dropdown-toggle {
+  width: 100%;
+  background: white;
+  border: none;
+  border-bottom: 2px solid #D4AF37;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  text-align: left;
+}
+
+.dropdown-toggle::-ms-expand {
+  display: none;
+}
+
+.dropdown-toggle:focus {
+  outline: none;
+}
+
+.dropdown-toggle:hover {
+  background-color: #f9f9f9;
+}
+
+.dropdown-text {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 2px solid #D4AF37;
+  border-top: 1px solid #eee;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  animation: slideDown 0.3s ease;
+  display: block;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dropdown Item */
+.dropdown-item {
+  display: block;
+  padding: 15px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  border-bottom: 1px solid #eee;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f9f9f9;
+  color: #D4AF37;
+  padding-left: 30px;
+}
+
+.dropdown-item.active {
+  background-color: #fff8e7;
+  color: #D4AF37;
+  font-weight: 700;
+  border-left: 4px solid #FF6B35;
+}
+
+/* Custom Scrollbar for Dropdown */
+.dropdown-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background: #b8941f;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .category-buttons {
+    gap: 15px;
+  }
+
+  .category-button {
+    font-size: 1rem;
+    padding: 8px 15px;
+  }
+
+  .dropdown-text {
+    font-size: 1rem;
+  }
+
+  .dropdown-toggle {
+    padding: 12px 15px;
+  }
+
+  .dropdown-item {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+  }
+
+  .dropdown-item:hover {
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation-container {
+    padding: 15px;
+  }
+
+  .category-buttons {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .category-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .dropdown-text {
+    font-size: 0.95rem;
+  }
+
+  .dropdown-item {
+    font-size: 0.9rem;
+  }
+}
