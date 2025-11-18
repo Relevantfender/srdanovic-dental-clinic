@@ -80,6 +80,16 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  outline: none;
+  text-align: left;
+}
+
+.dropdown-toggle::-ms-expand {
+  display: none;
+}
+
+.dropdown-toggle:focus {
+  outline: none;
 }
 
 .dropdown-toggle:hover {
@@ -110,14 +120,14 @@
   left: 0;
   right: 0;
   background: white;
-  border-left: none;
-  border-right: none;
-  border-bottom: 2px solid #D4AF37;
+  border: 2px solid #D4AF37;
+  border-top: 1px solid #eee;
   max-height: 400px;
   overflow-y: auto;
   z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   animation: slideDown 0.3s ease;
+  display: block;
 }
 
 @keyframes slideDown {

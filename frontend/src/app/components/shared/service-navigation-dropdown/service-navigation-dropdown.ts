@@ -42,6 +42,8 @@ export class ServiceNavigationDropdownComponent implements OnInit {
 
   toggleDropdown(): void {
     this.isDropdownOpen.update(val => !val);
+    console.log('Dropdown open:', this.isDropdownOpen());
+    console.log('Services:', this.services());
   }
 
   closeDropdown(): void {
