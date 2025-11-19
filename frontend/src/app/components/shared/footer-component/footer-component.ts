@@ -17,9 +17,9 @@ interface FooterLink {
 export class FooterComponent {
   quickLinks: FooterLink[] = [
     { label: 'Home', route: '/' },
-    { label: 'About Us', route: '/about' },
-    { label: 'Services', route: '/services' },
-    { label: 'Contact', route: '/contact' }
+    { label: 'About Us', route: '/about-us' },
+    { label: 'Gallery', route: '/gallery' },
+    { label: 'Pricing', route: '/pricing' }
   ];
 
   resources: FooterLink[] = [
@@ -30,7 +30,7 @@ export class FooterComponent {
   ];
 
   contactInfo = {
-    phone: '(+3816) 64 44 86 435',
+    phone: '(+381) 64 44 86 435',
     email: 'info@srdanovic-dental.com',
     address: '123 Dental Street, Belgrade, Serbia'
   };
