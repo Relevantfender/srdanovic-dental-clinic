@@ -35,59 +35,48 @@ export class ServiceCarouselComponent {
     return Math.floor(availableWidth / itemWidth);
   }
 
+  get maxIndex(): number {
+    // Maximum scroll position: total items minus items that fit in view
+    const max = Math.max(0, this.services.length - this.itemsPerView);
+    return max;
+  }
+
+  get isAtStart(): boolean {
+    return this.currentIndex() <= 0;
+  }
+
+  get isAtEnd(): boolean {
+    return this.currentIndex() >= this.maxIndex;
+  }
+
   get visibleServices(): ServiceItem[] {
-    if (this.services.length === 0) return [];
-
-    const itemsPerView = this.itemsPerView;
-
-    // Only duplicate if we have more items per view than total services
-    // This allows for smooth infinite scrolling
-    if (this.services.length <= itemsPerView) {
-      // Not enough items to fill the view, duplicate once for smooth cycling
-      return [...this.services];
-    } else {
-      // Enough items, just add one extra set for smooth infinite scroll
-      return [...this.services];
-    }
+    // Just return the services without duplication
+    return this.services;
   }
 
   get transformStyle(): string {
     const itemWidth = 250; // 250px width per item
-    const gap = 0; // No gap between items (updated from 20px)
+    const gap = 0; // No gap between items
     const offset = this.currentIndex() * (itemWidth + gap);
     return `translateX(-${offset}px)`;
   }
 
   slideNext(): void {
-    if (this.isAnimating()) return;
+    if (this.isAnimating() || this.isAtEnd) return;
 
     this.isAnimating.set(true);
-    this.currentIndex.update((val) => val + 1);
+    this.currentIndex.update((val) => Math.min(val + 1, this.maxIndex));
 
     setTimeout(() => {
       this.isAnimating.set(false);
-
-      // Reset to beginning when reaching the end of first set
-      if (this.currentIndex() >= this.services.length) {
-        this.currentIndex.set(0);
-      }
     }, 500);
   }
 
   slidePrev(): void {
-    if (this.isAnimating()) return;
+    if (this.isAnimating() || this.isAtStart) return;
 
     this.isAnimating.set(true);
-
-    // If at the beginning, jump to the end of first set
-    if (this.currentIndex() === 0) {
-      this.currentIndex.set(this.services.length);
-      setTimeout(() => {
-        this.currentIndex.update((val) => val - 1);
-      }, 50);
-    } else {
-      this.currentIndex.update((val) => val - 1);
-    }
+    this.currentIndex.update((val) => Math.max(val - 1, 0));
 
     setTimeout(() => {
       this.isAnimating.set(false);

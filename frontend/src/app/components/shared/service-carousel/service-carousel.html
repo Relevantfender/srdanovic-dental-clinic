@@ -22,7 +22,7 @@
     <button
       class="carousel-arrow carousel-arrow-prev"
       (click)="slidePrev()"
-      [disabled]="isAnimating()"
+      [disabled]="isAnimating() || isAtStart"
       aria-label="Previous slide"
     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +33,7 @@
     <button
       class="carousel-arrow carousel-arrow-next"
       (click)="slideNext()"
-      [disabled]="isAnimating()"
+      [disabled]="isAnimating() || isAtEnd"
       aria-label="Next slide"
     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
