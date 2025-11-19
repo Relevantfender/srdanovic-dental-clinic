@@ -84,6 +84,34 @@ footer {
   font-size: 0.95rem;
 }
 
+.footer-contact-link {
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.footer-contact-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #c19852;
+  transition: width 0.3s ease;
+}
+
+.footer-contact-link:hover {
+  color: #c19852;
+}
+
+.footer-contact-link:hover::after {
+  width: 100%;
+}
+
 /* Hours List */
 .hours-list li {
   color: white;
