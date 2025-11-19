@@ -83,6 +83,8 @@
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateX(-50px);
 }
 
 .contact-info:hover {
@@ -118,6 +120,8 @@
   background-color: #f9f9f9;
   border-radius: 10px;
   transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-30px) scale(0.9);
 }
 
 .info-item:hover {
@@ -135,10 +139,34 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.info-icon::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
 }
 
 .info-icon svg {
   color: white;
+  position: relative;
+  z-index: 1;
 }
 
 .info-item h3 {
@@ -162,6 +190,8 @@
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateX(50px);
 }
 
 .contact-form-section:hover {
@@ -185,6 +215,8 @@
 .form-group {
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .form-group label {
@@ -208,8 +240,8 @@
 .form-group textarea:focus {
   outline: none;
   border-color: #D4AF37;
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1), 0 4px 12px rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px) scale(1.01);
 }
 
 .form-group input::placeholder,
@@ -233,6 +265,33 @@
   cursor: pointer;
   transition: all 0.3s ease;
   align-self: flex-start;
+  opacity: 0;
+  transform: scale(0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.submit-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.submit-btn span {
+  position: relative;
+  z-index: 1;
 }
 
 .submit-btn:hover:not(:disabled) {

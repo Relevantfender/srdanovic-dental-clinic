@@ -1,6 +1,6 @@
 <div class="contact-page">
   <!-- Hero Section with Image -->
-  <div class="hero-section" @fadeIn>
+  <div class="hero-section">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title">Get In Touch</h1>
@@ -9,9 +9,9 @@
   </div>
 
   <div class="contact-container">
-    <div class="contact-content" @fadeIn>
+    <div class="contact-content">
       <!-- Contact Info Section -->
-      <div class="contact-info" @slideInLeft>
+      <div class="contact-info" #contactInfo>
         <h2 class="info-title">Contact Information</h2>
         <p class="info-intro">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
 
@@ -69,7 +69,7 @@
       </div>
 
       <!-- Contact Form Section -->
-      <div class="contact-form-section" @slideInRight>
+      <div class="contact-form-section" #contactFormSection>
         <h2 class="form-title">Send Us a Message</h2>
         <form class="contact-form" (ngSubmit)="onSubmit()" #contactForm="ngForm">
           <div class="form-group">
