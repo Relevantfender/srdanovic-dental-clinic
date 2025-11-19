@@ -44,6 +44,7 @@
                 <!-- Specialization Header -->
                 <button
                   class="specialization-header"
+                  [class.expanded]="isSpecializationExpanded(specialization.id)"
                   (click)="toggleSpecialization(specialization.id, $event)">
                   <h3>{{ specialization.name }}</h3>
                   <svg

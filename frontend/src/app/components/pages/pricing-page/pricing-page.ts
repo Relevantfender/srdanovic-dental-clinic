@@ -51,26 +51,48 @@ export class PricingPage implements OnInit {
   toggleSpecialization(specId: number, event: Event) {
     const button = event.currentTarget as HTMLElement;
     const section = button.closest('.specialization-section');
-    const itemsList = section?.querySelector('.items-list') as HTMLElement;
 
     if (this.expandedSpecializations.has(specId)) {
       // Collapse animation
+      const itemsList = section?.querySelector('.items-list') as HTMLElement;
       if (itemsList) {
         const currentHeight = itemsList.scrollHeight;
         itemsList.style.height = currentHeight + 'px';
         itemsList.offsetHeight; // Force reflow
         itemsList.style.height = '0px';
+
+        // Wait for animation to complete before removing from set
+        setTimeout(() => {
+          this.expandedSpecializations.delete(specId);
+        }, 400);
+      } else {
+        this.expandedSpecializations.delete(specId);
       }
-      this.expandedSpecializations.delete(specId);
     } else {
       this.expandedSpecializations.add(specId);
       // Expand animation will happen after DOM update
       setTimeout(() => {
+        const itemsList = section?.querySelector('.items-list') as HTMLElement;
         if (itemsList) {
           const targetHeight = itemsList.scrollHeight;
           itemsList.style.height = '0px';
           itemsList.offsetHeight; // Force reflow
           itemsList.style.height = targetHeight + 'px';
+
+          // Animate individual items
+          const items = itemsList.querySelectorAll('.price-item');
+          items.forEach((item, index) => {
+            setTimeout(() => {
+              (item as HTMLElement).animate([
+                { opacity: 0, transform: 'translateX(-20px)' },
+                { opacity: 1, transform: 'translateX(0)' }
+              ], {
+                duration: 300,
+                easing: 'ease-out',
+                fill: 'forwards'
+              });
+            }, index * 50);
+          });
 
           // Remove inline height after animation completes
           setTimeout(() => {
