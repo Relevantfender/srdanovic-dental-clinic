@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PricingService, Category, Specialization, PriceItem, CartItem } from '../../../services/pricing.service';
 
@@ -40,14 +40,44 @@ export class PricingPage implements OnInit {
     } else {
       this.selectedCategoryId = categoryId;
       this.expandedSpecializations.clear();
+
+      // Trigger animations after the DOM updates
+      setTimeout(() => {
+        this.animateSpecializations();
+      }, 0);
     }
   }
 
-  toggleSpecialization(specId: number) {
+  toggleSpecialization(specId: number, event: Event) {
+    const button = event.currentTarget as HTMLElement;
+    const section = button.closest('.specialization-section');
+    const itemsList = section?.querySelector('.items-list') as HTMLElement;
+
     if (this.expandedSpecializations.has(specId)) {
+      // Collapse animation
+      if (itemsList) {
+        const currentHeight = itemsList.scrollHeight;
+        itemsList.style.height = currentHeight + 'px';
+        itemsList.offsetHeight; // Force reflow
+        itemsList.style.height = '0px';
+      }
       this.expandedSpecializations.delete(specId);
     } else {
       this.expandedSpecializations.add(specId);
+      // Expand animation will happen after DOM update
+      setTimeout(() => {
+        if (itemsList) {
+          const targetHeight = itemsList.scrollHeight;
+          itemsList.style.height = '0px';
+          itemsList.offsetHeight; // Force reflow
+          itemsList.style.height = targetHeight + 'px';
+
+          // Remove inline height after animation completes
+          setTimeout(() => {
+            itemsList.style.height = '';
+          }, 400);
+        }
+      }, 0);
     }
   }
 
@@ -161,5 +191,22 @@ export class PricingPage implements OnInit {
       }
     }
     this.closeQuantityDialog();
+  }
+
+  private animateSpecializations(): void {
+    const sections = document.querySelectorAll('.specialization-section');
+
+    sections.forEach((section, index) => {
+      setTimeout(() => {
+        (section as HTMLElement).animate([
+          { opacity: 0, transform: 'translateY(20px)' },
+          { opacity: 1, transform: 'translateY(0)' }
+        ], {
+          duration: 400,
+          easing: 'ease-out',
+          fill: 'forwards'
+        });
+      }, index * 100);
+    });
   }
 }

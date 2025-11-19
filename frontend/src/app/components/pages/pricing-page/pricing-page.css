@@ -161,6 +161,8 @@
 .specialization-section {
   border-left: 3px solid #D4AF37;
   padding-left: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .specialization-header {
@@ -202,6 +204,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  overflow: hidden;
+  transition: height 0.4s ease-out;
 }
 
 /* Price Item */
