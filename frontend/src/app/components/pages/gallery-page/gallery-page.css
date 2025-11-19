@@ -16,6 +16,8 @@
 .page-header {
   text-align: center;
   margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(50px);
 }
 
 .page-title {
@@ -38,6 +40,8 @@
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(50px);
 }
 
 /* Decorative corner borders */
@@ -98,6 +102,8 @@
   aspect-ratio: 1;
   cursor: pointer;
   perspective: 1000px;
+  opacity: 0;
+  transform: scale(1.2);
 }
 
 /* Flip Card Container */

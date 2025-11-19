@@ -1,11 +1,11 @@
 <div class="gallery-page">
   <div class="gallery-container">
-    <div class="page-header">
+    <div class="page-header" #pageHeader>
       <h1 class="page-title">Our Gallery</h1>
       <p class="page-subtitle">Explore the transformative results we've achieved for our patients</p>
     </div>
 
-    <div class="content-section">
+    <div class="content-section" #contentSection>
       <p class="intro-text">
         A picture is worth a thousand words. Browse through our gallery to see the transformative
         results we've achieved for our patients. From smile makeovers to complex restorations,
@@ -20,7 +20,7 @@
 
   <!-- Gallery Grid Section -->
   <div class="gallery-grid-section">
-    <div class="gallery-grid">
+    <div class="gallery-grid" #galleryGrid>
       @for (patient of patients; track patient.id) {
         <div class="gallery-item" (click)="openPatientGallery(patient)">
           <div class="flip-card">

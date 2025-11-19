@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GalleryService, PatientGallery } from '../../../services/gallery.service';
 
@@ -9,14 +9,18 @@ import { GalleryService, PatientGallery } from '../../../services/gallery.servic
   templateUrl: './gallery-page.html',
   styleUrl: './gallery-page.css'
 })
-export class GalleryPage implements OnInit, AfterViewInit {
+export class GalleryPage implements OnInit, AfterViewInit, OnDestroy {
   private galleryService = inject(GalleryService);
 
   @ViewChild('carouselTrack') carouselTrack!: ElementRef<HTMLDivElement>;
+  @ViewChild('pageHeader') pageHeader!: ElementRef<HTMLElement>;
+  @ViewChild('contentSection') contentSection!: ElementRef<HTMLElement>;
+  @ViewChild('galleryGrid') galleryGrid!: ElementRef<HTMLElement>;
 
   patients: PatientGallery[] = [];
   selectedPatient: PatientGallery | null = null;
   currentImageIndex = 0;
+  private observers: IntersectionObserver[] = [];
 
   ngOnInit() {
     this.patients = this.galleryService.getAllPatients();
@@ -27,6 +31,102 @@ export class GalleryPage implements OnInit, AfterViewInit {
     if (this.selectedPatient) {
       setTimeout(() => this.scrollToActivePatient(), 100);
     }
+
+    // Setup scroll animations
+    this.setupScrollAnimations();
+  }
+
+  private setupScrollAnimations(): void {
+    const options = {
+      threshold: 0.3,
+      rootMargin: '0px'
+    };
+
+    // Page header animation
+    if (this.pageHeader) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.animatePageHeader();
+          }
+        });
+      }, options);
+      observer.observe(this.pageHeader.nativeElement);
+      this.observers.push(observer);
+    }
+
+    // Content section animation
+    if (this.contentSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.animateContentSection();
+          }
+        });
+      }, options);
+      observer.observe(this.contentSection.nativeElement);
+      this.observers.push(observer);
+    }
+
+    // Gallery grid items animation
+    if (this.galleryGrid) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.animateGalleryItems();
+          }
+        });
+      }, options);
+      observer.observe(this.galleryGrid.nativeElement);
+      this.observers.push(observer);
+    }
+  }
+
+  private animatePageHeader(): void {
+    const element = this.pageHeader.nativeElement;
+
+    element.animate([
+      { opacity: 0, transform: 'translateY(50px)' },
+      { opacity: 1, transform: 'translateY(0)' }
+    ], {
+      duration: 800,
+      easing: 'ease-out',
+      fill: 'forwards'
+    });
+  }
+
+  private animateContentSection(): void {
+    const element = this.contentSection.nativeElement;
+
+    element.animate([
+      { opacity: 0, transform: 'translateY(50px)' },
+      { opacity: 1, transform: 'translateY(0)' }
+    ], {
+      duration: 800,
+      easing: 'ease-out',
+      fill: 'forwards'
+    });
+  }
+
+  private animateGalleryItems(): void {
+    const items = this.galleryGrid.nativeElement.querySelectorAll('.gallery-item');
+
+    items.forEach((item, index) => {
+      setTimeout(() => {
+        (item as HTMLElement).animate([
+          { opacity: 0, transform: 'scale(1.2)' },
+          { opacity: 1, transform: 'scale(1)' }
+        ], {
+          duration: 600,
+          easing: 'ease-out',
+          fill: 'forwards'
+        });
+      }, index * 50);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.observers.forEach(observer => observer.disconnect());
   }
 
   openPatientGallery(patient: PatientGallery) {

@@ -93,6 +93,10 @@ export class HeaderComponent {
       route: '/pricing'
     },
     {
+      label: 'Gallery',
+      route: '/gallery'
+    },
+    {
       label: 'Contact Us',
       route: '/contact-us'
     }
