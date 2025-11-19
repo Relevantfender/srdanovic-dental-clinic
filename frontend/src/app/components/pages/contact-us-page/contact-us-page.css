@@ -183,6 +183,33 @@
   line-height: 1.6;
 }
 
+.contact-link {
+  color: #666;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.contact-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #D4AF37;
+  transition: width 0.3s ease;
+}
+
+.contact-link:hover {
+  color: #D4AF37;
+}
+
+.contact-link:hover::after {
+  width: 100%;
+}
+
 /* Contact Form Section */
 .contact-form-section {
   background-color: #ffffff;
