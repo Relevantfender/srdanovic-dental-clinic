@@ -26,6 +26,8 @@
 /* Left Side - Text Content */
 .text-content {
   padding-right: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .section-title {
@@ -75,6 +77,8 @@
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  opacity: 0;
+  transform: translateY(-150px);
 }
 
 .image-small {
@@ -88,12 +92,16 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   border: 5px solid white;
   z-index: 2;
+  opacity: 0;
+  transform: translateY(150px);
 }
 
 /* Employees Section */
 .employees-section {
   padding: 5rem 0;
   background-color: #ffffff;
+  opacity: 0;
+  transform: translateY(50px);
 }
 
 .carousel-title {
@@ -223,6 +231,55 @@
   height: 28px;
 }
 
+/* Employee Avatar Carousel */
+.employee-carousel {
+  margin-top: 30px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 20px 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.employee-carousel-track {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  min-width: min-content;
+  padding: 0 10px;
+}
+
+.employee-carousel-item {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 0;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  opacity: 0.5;
+  position: relative;
+}
+
+.employee-carousel-item:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.employee-carousel-item.active {
+  opacity: 1;
+  border-color: #c19852;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(193, 152, 82, 0.5);
+}
+
+.employee-carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
   .content-wrapper {
@@ -317,6 +374,11 @@
   .member-description {
     font-size: 1rem;
   }
+
+  .employee-carousel-item {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -330,5 +392,14 @@
 
   .carousel-card {
     padding: 15px;
+  }
+
+  .employee-carousel-item {
+    width: 70px;
+    height: 70px;
+  }
+
+  .employee-carousel-track {
+    gap: 1rem;
   }
 }
