@@ -7,6 +7,7 @@ import {PricingPage} from './components/pages/pricing-page/pricing-page';
 import {ServiceDetailPage} from './components/pages/service-detail-page/service-detail-page';
 import {AboutUsPage} from './components/pages/about-us-page/about-us-page';
 import {ContactUsPage} from './components/pages/contact-us-page/contact-us-page';
+import {NotFoundPage} from './components/pages/not-found-page/not-found-page';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,10 @@ export const routes: Routes = [
   {
     path: 'services/:category/:serviceSlug',
     component: ServiceDetailPage
+  },
+  {
+    path: '**',
+    component: NotFoundPage
   }
 ];
 
